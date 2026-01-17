@@ -64,15 +64,18 @@
       margin-bottom: 60px;
     }
 
-    /* Top Center Company Logo */
+    /* Top Center Company Logo - UPDATED SIZE */
     .company-logo-spot {
       text-align: center;
       margin-bottom: 40px;
       padding-bottom: 20px;
-      border-bottom: 1px dashed var(--border); /* Subtle separation */
+      border-bottom: 1px dashed var(--border); 
     }
     .company-logo-spot img {
-      max-height: 60px; /* Adjust size as needed */
+      /* Increased height to allow normal/square logos */
+      max-height: 120px; 
+      /* Max width constraint to prevent massive logos on desktop */
+      max-width: 240px;
       width: auto;
       display: inline-block;
     }
@@ -87,7 +90,6 @@
     .hero-logo {
       flex-shrink: 0;
       padding-top: 10px;
-      /* Logo now on left, no special alignment needed here */
     }
     .hero-logo img {
       width: 160px;
@@ -248,7 +250,7 @@
   <header>
     <div class="container">
       
-      <!-- TOP CENTER: Company Logo -->
+      <!-- TOP CENTER: Company Logo (Normal Size) -->
       <div class="company-logo-spot">
         <img src="c-logo.png" alt="MNDe Systems Company Logo" />
       </div>
@@ -256,7 +258,7 @@
       <!-- HERO SPLIT: Orbit Logo (Left) / Text (Right) -->
       <div class="hero-split">
         
-        <!-- ORBIT LOGO (Now on Left) -->
+        <!-- ORBIT LOGO (Left) -->
         <div class="hero-logo">
           <img src="orbit-logo.png" alt="Orbit Protocol Logo" />
         </div>
