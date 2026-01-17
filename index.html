@@ -5,15 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   
   <!-- METADATA -->
-  <title>MNDe Systems — Orbit Protocol & Reference Validators</title>
-  <meta name="description" content="MNDe Systems builds the Orbit Protocol and reference validators and SDKs. Fail-closed, deterministic, minimal protocol infrastructure.">
-  <link rel="canonical" href="https://mndesystems.com/">
+  <title>Orbit Protocol Specification v1.0 — Published by MNDe Systems</title>
+  <meta name="description" content="Orbit Protocol specification and reference implementations published by MNDe Systems. Schema definition and validation logic only.">
   
-  <!-- FAVICON (Uses the Orbit Logo) -->
+  <!-- Canonical URL scoped to the spec version, not the company root -->
+  <link rel="canonical" href="https://mndesystems.com/orbit/spec/v1.0">
+  
+  <!-- FAVICON -->
   <link rel="icon" type="image/png" href="orbit-logo.png">
 
-  <meta property="og:title" content="MNDe Systems — Orbit Protocol & Reference Validators">
-  <meta property="og:description" content="Orbit Protocol and reference implementations by MNDe Systems. Kotlin validator, Java SDK, and more.">
+  <meta property="og:title" content="Orbit Protocol Specification v1.0 — Published by MNDe Systems">
+  <meta property="og:description" content="Orbit Protocol specification and reference implementations. Schema definition and validation logic only.">
   <meta property="og:url" content="https://mndesystems.com/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="orbit-logo.png">
@@ -169,15 +171,6 @@
       color: var(--charcoal);
     }
 
-    .ascii-chart {
-      background: #fff;
-      border: none;
-      padding: 0;
-      color: var(--black);
-      font-weight: bold;
-      line-height: 1.4;
-    }
-
     .nav-bar {
       display: flex;
       gap: 32px;
@@ -226,7 +219,6 @@
       header { padding: 30px 0; }
       .nav-bar { flex-direction: column; gap: 12px; }
       
-      /* Mobile layout for logo */
       .hero-split { flex-direction: column-reverse; }
       .hero-logo img { width: 120px; margin-bottom: 24px; }
     }
@@ -238,34 +230,32 @@
   <header>
     <div class="container">
       
-      <!-- Flex Container for Text + Logo -->
       <div class="hero-split">
         <div class="hero-text">
           <div style="font-weight: 900; font-size: 20px; letter-spacing: -0.05em; margin-bottom: 32px;">
             MNDe Systems
           </div>
           
-          <h1>Building the Orbit Protocol —<br>reference-grade validation and SDKs.</h1>
+          <h1>Orbit Protocol Specification<br>and Reference Implementations.</h1>
           
           <div style="margin-top: 24px; max-width: 600px;">
             <p style="font-size: 18px; color: #57606a; margin-bottom: 12px;">
-              Fail-closed. Deterministic. Minimal by design.
+              Schema definition. Validation logic. Specification v1.0.
             </p>
             <!-- STATUS DECLARATION -->
             <p style="font-size: 15px; color: var(--black); font-weight: 600;">
-              Status: Orbit Protocol v1.0 — sealed, enforced, and stable.
+              Status: Orbit Protocol v1.0 — Specification Finalized (v1 scope only).
             </p>
           </div>
 
           <nav class="nav-bar">
             <a href="#orbit">What is Orbit?</a>
             <a href="#sdks">Reference Code</a>
-            <a href="#principles">Principles</a>
+            <a href="#principles">Characteristics</a>
             <a href="#contact">Contact</a>
           </nav>
         </div>
 
-        <!-- ORBIT LOGO -->
         <div class="hero-logo">
           <img src="orbit-logo.png" alt="Orbit Protocol Logo" />
         </div>
@@ -278,11 +268,20 @@
   <section class="container" id="orbit">
     <h2>What is Orbit?</h2>
 
-    <p>Orbit is a minimal intent protocol designed to eliminate ambiguity. It defines how intents are structured and validated, but not how they are executed.</p>
+    <p>Orbit is a schema specification for single-action intents. It defines data structure and validation rules. It does not define execution logic, identity management, or authorization policies.</p>
     
-    <p>All Orbit implementations rely on deterministic, fail-closed validation so systems behave predictably across environments.</p>
+    <!-- Legal Boundary Paragraph -->
+    <p style="font-size: 14px; color: #57606a; margin-bottom: 24px;">
+      Orbit is a technical specification. MNDe Systems does not operate, execute, or control third-party systems that use Orbit, and assumes no responsibility for outcomes resulting from its adoption or implementation.
+    </p>
 
-    <!-- UPDATED JSON EXAMPLE (v1 enforced) -->
+    <p>The reference implementations validate inputs against the v1.0 specification. Inputs deviating from the schema are rejected.</p>
+
+    <!-- Reference Implementation Disclaimer -->
+    <p style="font-size: 14px; color: #57606a; margin-top: 16px;">
+      Reference implementations are provided for evaluation purposes only and do not confer certification, approval, or guarantees of correctness.
+    </p>
+
     <div style="margin-top: 24px; margin-bottom: 8px; font-size: 12px; font-weight: 600; color: #57606a; font-family: var(--font);">example_intent.json</div>
 <pre>
 {
@@ -295,7 +294,6 @@
 }
 </pre>
 
-    <!-- NON-GOALS (v1) -->
     <h3 style="margin-top: 40px;">Non-goals (v1)</h3>
     <ul>
       <li>No version negotiation</li>
@@ -303,26 +301,25 @@
       <li>No schema evolution</li>
       <li>No execution semantics</li>
     </ul>
-    <p style="font-size: 14px; color: #57606a;">These are intentionally deferred to v2+.</p>
+    <p style="font-size: 14px; color: #57606a;">These functions are excluded from the v1 specification.</p>
 
   </section>
 
   <!-- REFERENCE CODE & SDKS -->
   <section class="container" id="sdks">
     <h2>Reference Code & SDKs</h2>
-    <p>Maintained, authoritative Orbit implementations.</p>
+    <p>Source code and reference libraries.</p>
     
     <div class="def-list">
       
       <div class="def-item">
-        <!-- CANONICAL REFERENCE -->
         <a href="https://github.com/mndesystems-ship-it/orbit-java/releases/tag/v1.0.0-enforced" target="_blank" class="def-title">Canonical Reference Implementation &rarr;</a>
         <p class="def-desc">Java — <code>orbit-java</code> @ <strong>v1.0.0-enforced</strong></p>
       </div>
 
       <div class="def-item">
         <a href="https://github.com/mndesystems-ship-it" target="_blank" class="def-title">GitHub Organization &rarr;</a>
-        <p class="def-desc">Browse all MNDe Systems repositories.</p>
+        <p class="def-desc">MNDe Systems source code repositories.</p>
       </div>
 
       <div class="def-item">
@@ -334,13 +331,13 @@
 
   <!-- DESIGN PRINCIPLES -->
   <section class="container" id="principles">
-    <h2>Design Principles</h2>
+    <h2>Characteristics</h2>
     <ul>
-      <li>Fail-closed validation</li>
-      <li>Deterministic behavior</li>
-      <li>Minimal surface area</li>
+      <li>Input Validation</li>
+      <li>Deterministic Schema</li>
+      <li>Restricted Scope</li>
       <li>Separation of validation and execution</li>
-      <li>Long-term protocol stability</li>
+      <li>Immutable Versioning</li>
     </ul>
   </section>
 
@@ -354,7 +351,7 @@
     </p>
 
     <p>
-      <strong>LinkedIn:</strong><br>
+      <strong>Professional Contact:</strong><br>
       <a href="https://www.linkedin.com/in/andrew-green-905ba23a4/" target="_blank">Andrew Green</a>
     </p>
 
@@ -368,7 +365,7 @@
   <footer>
     <div class="container">
       <div style="margin-bottom: 24px; color: #57606a;">
-        Orbit is a deterministic intent validation protocol with a fail-closed reference implementation.
+        MNDe Systems publishes the Orbit Protocol specification and reference validators. Use of Orbit is independent of MNDe Systems.
       </div>
       
       <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px;">
