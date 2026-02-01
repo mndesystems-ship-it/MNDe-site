@@ -1,411 +1,265 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
-  <!-- METADATA -->
-  <title>Orbit Protocol Specification v1.0 — Published by MNDe Systems</title>
-  <meta name="description" content="Orbit Protocol specification and reference implementations published by MNDe Systems. Schema definition and validation logic only.">
-  
-  <!-- Canonical URL scoped to the spec version -->
-  <link rel="canonical" href="https://mndesystems.com/orbit/spec/v1.0">
-  
-  <!-- FAVICON -->
-  <link rel="icon" type="image/png" href="orbit-logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MNDe Systems</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #000000;
+            --border: #000000;
+            --mono: "Courier New", Courier, monospace;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
 
-  <meta property="og:title" content="Orbit Protocol Specification v1.0 — Published by MNDe Systems">
-  <meta property="og:description" content="Orbit Protocol specification and reference implementations. Schema definition and validation logic only.">
-  <meta property="og:url" content="https://mndesystems.com/">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="orbit-logo.png">
-  
-  <!-- Inter Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        * {
+            box-sizing: border-box;
+        }
 
-  <style>
-    :root {
-      /* Red Hat / GitHub Fusion Palette */
-      --red: #EE0000;          
-      --black: #151515;        
-      --charcoal: #24292f;     
-      --grey-light: #f6f8fa;   
-      --border: #d0d7de;       
-      --bg: #ffffff;
-      
-      /* Type */
-      --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-    }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    body {
-      background: var(--bg);
-      color: var(--charcoal);
-      font-family: var(--font);
-      font-size: 16px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      border-top: 4px solid var(--red);
-    }
+        .container {
+            width: 100%;
+            max-width: 720px;
+            padding: 60px 20px;
+        }
 
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+        section {
+            margin-bottom: 80px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
 
-    header {
-      padding: 40px 0 60px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 60px;
-    }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
 
-    /* Top Center Company Logo - UPDATED SIZE */
-    .company-logo-spot {
-      text-align: center;
-      margin-bottom: 40px;
-      padding-bottom: 20px;
-      border-bottom: 1px dashed var(--border); 
-    }
-    .company-logo-spot img {
-      /* Increased height to allow normal/square logos */
-      max-height: 120px; 
-      /* Max width constraint to prevent massive logos on desktop */
-      max-width: 240px;
-      width: auto;
-      display: inline-block;
-    }
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -0.03em;
+        }
 
-    /* Hero Layout - Swapped Sides */
-    .hero-split {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 40px;
-    }
-    .hero-logo {
-      flex-shrink: 0;
-      padding-top: 10px;
-    }
-    .hero-logo img {
-      width: 160px;
-      height: auto;
-      display: block;
-    }
-    .hero-text {
-      flex: 1;
-      min-width: 300px;
-    }
+        h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0 0 1.5rem 0;
+            font-family: var(--mono);
+            border-bottom: 2px solid var(--border);
+            display: inline-block;
+        }
 
-    section {
-      margin-bottom: 80px;
-    }
+        .sub-header {
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            color: var(--text);
+        }
 
-    h1 {
-      font-weight: 700;
-      font-size: 42px;
-      letter-spacing: -0.02em;
-      color: var(--black);
-      line-height: 1.1;
-    }
+        .lead-text {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
 
-    h2 {
-      font-weight: 600;
-      font-size: 24px;
-      margin-bottom: 24px;
-      color: var(--black);
-      display: flex;
-      align-items: center;
-    }
-    
-    h2::before {
-      content: '';
-      display: inline-block;
-      width: 4px;
-      height: 24px;
-      background: var(--red);
-      margin-right: 12px;
-    }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
 
-    h3 {
-      font-weight: 600;
-      font-size: 16px;
-      margin-top: 32px;
-      margin-bottom: 12px;
-      color: var(--black);
-    }
+        ul li {
+            font-family: var(--mono);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
 
-    p {
-      margin-bottom: 24px;
-      max-width: 65ch;
-      color: #333;
-    }
+        ul li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+        }
 
-    a {
-      color: var(--red);
-      text-decoration: none;
-      font-weight: 500;
-    }
-    a:hover {
-      text-decoration: underline;
-      color: #b30000;
-    }
+        .diagram {
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            border: 1px solid var(--border);
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            white-space: pre;
+            overflow-x: auto;
+        }
 
-    ul {
-      padding-left: 0;
-      list-style: none;
-      margin-bottom: 24px;
-    }
-    
-    li {
-      margin-bottom: 12px;
-      padding-left: 20px;
-      position: relative;
-    }
+        .footer {
+            border-top: 1px solid var(--border);
+            padding-top: 40px;
+            margin-top: 100px;
+            font-family: var(--mono);
+            font-size: 0.85rem;
+        }
 
-    li::before {
-      content: '•';
-      color: var(--red);
-      font-weight: bold;
-      position: absolute;
-      left: 0;
-    }
+        .contact-info {
+            margin-top: 20px;
+        }
 
-    pre {
-      font-family: var(--mono);
-      font-size: 13px;
-      background: var(--grey-light);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 16px;
-      overflow-x: auto;
-      margin-bottom: 32px;
-      color: var(--charcoal);
-    }
+        .contact-info div {
+            margin-bottom: 5px;
+        }
 
-    .nav-bar {
-      display: flex;
-      gap: 32px;
-      margin-top: 24px;
-      font-size: 15px;
-    }
-    .nav-bar a {
-      color: var(--charcoal);
-      font-weight: 600;
-    }
-    .nav-bar a:hover {
-      color: var(--red);
-    }
+        a {
+            color: inherit;
+            text-decoration: underline;
+        }
 
-    .def-list {
-      display: grid;
-      gap: 32px;
-    }
-    .def-item {
-      border-left: 1px solid var(--border);
-      padding-left: 24px;
-    }
-    .def-title {
-      font-weight: 700;
-      font-size: 15px;
-      margin-bottom: 4px;
-      color: var(--black);
-      display: block;
-    }
-    .def-desc {
-      font-size: 15px;
-      color: #57606a;
-      margin: 0;
-    }
-
-    footer {
-      padding: 60px 0;
-      font-size: 13px;
-      color: #57606a;
-      border-top: 1px solid var(--border);
-      margin-top: 120px;
-    }
-
-    @media (max-width: 768px) {
-      h1 { font-size: 32px; }
-      header { padding: 30px 0; }
-      .nav-bar { flex-direction: column; gap: 12px; }
-      
-      /* Mobile: Stack nicely, logos centered */
-      .hero-split { flex-direction: column; align-items: center; }
-      .hero-logo { margin-bottom: 24px; }
-      .hero-logo img { width: 120px; }
-      .hero-text { text-align: center; }
-      .nav-bar { align-items: center; }
-    }
-  </style>
+        @media (max-width: 480px) {
+            h1 { font-size: 1.75rem; }
+            .diagram { font-size: 0.7rem; padding: 1rem; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- HEADER / HOME -->
-  <header>
-    <div class="container">
-      
-      <!-- HERO SPLIT: Orbit Logo (Left) / Text (Right) -->
-      <div class="hero-split">
-        
-        <!-- ORBIT LOGO (Left) -->
-        <div class="hero-logo">
-          <img src="orbit-logo.png" alt="Orbit Protocol Logo" />
+<div class="container">
+    <!-- Section 1. Header -->
+    <section id="header">
+        <h1>MNDe Systems</h1>
+        <div class="sub-header">Execution control for expensive and irreversible compute</div>
+        <div class="lead-text">
+            We stop waste before it runs.<br>
+            We do not observe.<br>
+            We refuse execution.
         </div>
+    </section>
 
-        <div class="hero-text">
-          <div style="font-weight: 900; font-size: 20px; letter-spacing: -0.05em; margin-bottom: 32px;">
-            MNDe Systems
-          </div>
-          
-          <h1>Orbit Protocol Specification<br>and Reference Implementations.</h1>
-          
-          <div style="margin-top: 24px; max-width: 600px;">
-            <p style="font-size: 18px; color: #57606a; margin-bottom: 12px;">
-              Schema definition. Validation logic. Specification v1.0.
-            </p>
-            <!-- STATUS DECLARATION -->
-            <p style="font-size: 15px; color: var(--black); font-weight: 600;">
-              Status: Orbit Protocol v1.0 — Specification Finalized (v1 scope only).
-            </p>
-          </div>
-
-          <nav class="nav-bar">
-            <a href="#orbit">What is Orbit?</a>
-            <a href="#sdks">Reference Code</a>
-            <a href="#principles">Characteristics</a>
-            <a href="#contact">Contact</a>
-          </nav>
-        </div>
-
-      </div>
-
-    </div>
-  </header>
-
-  <!-- WHAT IS ORBIT -->
-  <section class="container" id="orbit">
-    <h2>What is Orbit?</h2>
-
-    <p>Orbit is a schema specification for single-action intents. It defines data structure and validation rules. It does not define execution logic, identity management, or authorization policies.</p>
-    
-    <!-- Legal Boundary Paragraph -->
-    <p style="font-size: 14px; color: #57606a; margin-bottom: 24px;">
-      Orbit is a technical specification. MNDe Systems does not operate, execute, or control third-party systems that use Orbit, and assumes no responsibility for outcomes resulting from its adoption or implementation.
-    </p>
-
-    <p>The reference implementations validate inputs against the v1.0 specification. Inputs deviating from the schema are rejected.</p>
-
-    <!-- Reference Implementation Disclaimer -->
-    <p style="font-size: 14px; color: #57606a; margin-top: 16px;">
-      Reference implementations are provided for evaluation purposes only and do not confer certification, approval, or guarantees of correctness.
-    </p>
-
-    <div style="margin-top: 24px; margin-bottom: 8px; font-size: 12px; font-weight: 600; color: #57606a; font-family: var(--font);">example_intent.json</div>
-<pre>
-{
-  "orbit": "1.0",
-  "id": "intent-abc",
-  "action": "open",
-  "payload": {
-    "url": "https://example.com"
-  }
-}
-</pre>
-
-    <h3 style="margin-top: 40px;">Non-goals (v1)</h3>
-    <ul>
-      <li>No version negotiation</li>
-      <li>No extensible or multiple actions</li>
-      <li>No schema evolution</li>
-      <li>No execution semantics</li>
-    </ul>
-    <p style="font-size: 14px; color: #57606a;">These functions are excluded from the v1 specification.</p>
-
-  </section>
-
-  <!-- REFERENCE CODE & SDKS -->
-  <section class="container" id="sdks">
-    <h2>Reference Code & SDKs</h2>
-    <p>Source code and reference libraries.</p>
-    
-    <div class="def-list">
-      
-      <div class="def-item">
-        <a href="https://github.com/mndesystems-ship-it/orbit-java/releases/tag/v1.0.0-enforced" target="_blank" class="def-title">Canonical Reference Implementation &rarr;</a>
-        <p class="def-desc">Java — <code>orbit-java</code> @ <strong>v1.0.0-enforced</strong></p>
-      </div>
-
-      <div class="def-item">
-        <a href="https://github.com/mndesystems-ship-it" target="_blank" class="def-title">GitHub Organization &rarr;</a>
-        <p class="def-desc">MNDe Systems source code repositories.</p>
-      </div>
-
-      <div class="def-item">
-        <a href="https://github.com/mndesystems-ship-it/orbit-validator-kotlin" target="_blank" class="def-title">Orbit Kotlin Validator &rarr;</a>
-        <p class="def-desc">Kotlin/JVM validator implementation.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- DESIGN PRINCIPLES -->
-  <section class="container" id="principles">
-    <h2>Characteristics</h2>
-    <ul>
-      <li>Input Validation</li>
-      <li>Deterministic Schema</li>
-      <li>Restricted Scope</li>
-      <li>Separation of validation and execution</li>
-      <li>Immutable Versioning</li>
-    </ul>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="container" id="contact">
-    <h2>Contact</h2>
-
-    <p>
-      <strong>Email:</strong><br>
-      <a href="mailto:mndesystems@gmail.com" style="color: var(--charcoal); font-weight: 600;">mndesystems@gmail.com</a>
-    </p>
-
-    <p>
-      <strong>Professional Contact:</strong><br>
-      <a href="https://www.linkedin.com/in/andrew-green-905ba23a4/" target="_blank">Andrew Green</a>
-    </p>
-
-    <p>
-      <strong>Operations:</strong><br>
-      +1 (231) 420-9108
-    </p>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div style="margin-bottom: 24px; color: #57606a;">
-        MNDe Systems publishes the Orbit Protocol specification and reference validators. Use of Orbit is independent of MNDe Systems.
-      </div>
-      
-      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px;">
-        <div>
-          <strong>&copy; 2026 MNDe Systems</strong><br>
-          <a href="privacy.html" style="color: #57606a; font-weight: 400; text-decoration: underline;">Privacy Policy</a>
+    <!-- Section 2. What ACRL is -->
+    <section id="acrl">
+        <h2>ACRL. Authorization and Compute Refusal Layer.</h2>
+        <div class="lead-text">
+            ACRL operates at submit time.<br>
+            It evaluates declared intent.<br>
+            It enforces hard limits.<br>
+            If conditions fail, execution does not start.
         </div>
         
-        <div style="display: flex; gap: 24px;">
-           <a href="https://github.com/mndesystems-ship-it" target="_blank" style="color: #57606a; font-weight: 400;">GitHub</a>
-           <a href="https://github.com/mndesystems-ship-it/orbit-validator-kotlin" target="_blank" style="color: #57606a; font-weight: 400;">Kotlin Validator</a>
-           <a href="https://github.com/mndesystems-ship-it/orbit-java" target="_blank" style="color: #57606a; font-weight: 400;">Java SDK</a>
+        <div class="diagram">
+[ Declared Intent ] -> | ACRL GATE | -> [ Execution ]
+                         |
+                 [ Signed Refusal ]</div>
+
+        <ul>
+            <li>Synchronous.</li>
+            <li>Fail closed.</li>
+            <li>Pre allocation control.</li>
+            <li>Signed refusal record.</li>
+        </ul>
+    </section>
+
+    <!-- Section 3. Why it exists -->
+    <section id="problem">
+        <h2>The cost problem.</h2>
+        <div class="lead-text">
+            Modern compute systems allow jobs to start before cost is understood.<br>
+            The bill appears after execution begins.<br>
+            ACRL moves control to the last safe point.
         </div>
-      </div>
-    </div>
-  </footer>
+        <ul>
+            <li>Bad jobs start easily.</li>
+            <li>Oversized requests pass silently.</li>
+            <li>Cost correction happens too late.</li>
+        </ul>
+    </section>
+
+    <!-- Section 4. Where it lives -->
+    <section id="boundary">
+        <h2>Integration boundary.</h2>
+        <div class="lead-text">
+            ACRL integrates at execution submission points.<br>
+            It does not inspect runtime behavior.<br>
+            It does not monitor models.
+        </div>
+        <ul>
+            <li>Slurm submit hooks.</li>
+            <li>Batch schedulers.</li>
+            <li>Privileged service accounts.</li>
+            <li>Any path where intent becomes spend.</li>
+        </ul>
+    </section>
+
+    <!-- Section 5. Orbit relationship -->
+    <section id="orbit">
+        <h2>Orbit protocol.</h2>
+        <div class="lead-text">
+            Orbit defines deterministic intent.<br>
+            ACRL enforces release or refusal.
+        </div>
+        <ul>
+            <li>Intent is signed.</li>
+            <li>Rules are explicit.</li>
+            <li>Outcomes are binary.</li>
+        </ul>
+    </section>
+
+    <!-- Section 6. Observed numbers -->
+    <section id="data">
+        <h2>Production data.</h2>
+        <div class="lead-text">
+            The following numbers reflect submit time refusals only.<br>
+            They represent upper bound prevented spend.<br>
+            No extrapolation is applied.
+        </div>
+        <ul>
+            <li>Two to four percent of submitted jobs refused during early deployment.</li>
+            <li>One to two percent refusal rate after behavioral correction.</li>
+            <li>Low six figure annual prevented spend on a single production cluster.</li>
+            <li>Zero impact on training quality or throughput reported.</li>
+            <li>No runtime inspection performed.</li>
+        </ul>
+    </section>
+
+    <!-- Section 7. Limits -->
+    <section id="limits">
+        <h2>What this does not do.</h2>
+        <ul>
+            <li>Does not monitor execution.</li>
+            <li>Does not optimize workloads.</li>
+            <li>Does not predict outcomes.</li>
+            <li>Does not claim savings beyond refused jobs.</li>
+        </ul>
+    </section>
+
+    <!-- Section 8. Closing statement -->
+    <section id="closing">
+        <div class="lead-text">
+            ACRL is a hard boundary.<br>
+            It exists to say no before cost occurs.<br>
+            It is intentionally narrow.
+        </div>
+    </section>
+
+    <!-- Section 9. Footer -->
+    <footer class="footer">
+        <div>MNDe Systems builds deterministic control for execution boundaries.</div>
+        <div class="contact-info">
+            <div>Contact information only.</div>
+            <div>Email: <a href="mailto:MNDeproject@proton.me">MNDeproject@proton.me</a></div>
+            <div>Phone: 231-420-9108</div>
+        </div>
+    </footer>
+</div>
 
 </body>
 </html>
