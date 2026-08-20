@@ -11,6 +11,7 @@ const navItems = [
   { id: "integrations", label: "Integrations", href: "index.html#integrations" },
   { id: "security", label: "Security", href: "index.html#security" },
   { id: "roadmap", label: "Roadmap", href: "index.html#roadmap" },
+  { id: "blog", label: "Blog", href: "blog/index.html" },
   { id: "contact", label: "Contact", href: "contact.html" }
 ];
 
@@ -66,7 +67,7 @@ function renderHeader() {
   header.innerHTML = `
     <div class="container nav-shell">
       <a class="brand" href="${basePath}index.html" aria-label="MNDe home">
-        <span class="brand-mark" aria-hidden="true">M</span>
+        <img class="brand-mark" src="${basePath}assets/img/mnde-mark.svg" alt="" width="64" height="40" aria-hidden="true" />
         <span class="brand-text">
           <strong>MNDe</strong>
           <span>Machine-authorization infrastructure</span>

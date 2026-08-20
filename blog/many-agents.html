@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="The number of non-human principals taking consequential actions only goes one direction. Why controls that feel optional at one agent become load-bearing at ten thousand — and where machine authorization is heading."
+    />
+    <meta name="theme-color" content="#111416" />
+    <meta property="og:title" content="Preparing for a world of many agents | MNDe" />
+    <meta property="og:type" content="article" />
+    <title>Preparing for a world of many agents | MNDe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/site.css" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+    <link rel="canonical" href="https://mndesystems.com/blog/many-agents.html" />
+    <script defer src="../assets/js/site.js"></script>
+  </head>
+  <body data-page="blog">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="site-header" data-include="header"></header>
+      <main id="main" class="page-main">
+        <section class="page-hero">
+          <div class="container post-header reveal">
+            <p class="post-meta">Outlook &middot; 27 May 2026</p>
+            <h1>Preparing for a world of many agents</h1>
+            <p class="lead">
+              The count of non-human principals taking consequential actions only goes one direction. Controls
+              that feel optional at one agent become load-bearing at ten thousand.
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <article class="prose">
+              <p>
+                It is worth stating plainly what the rest of these notes assume: the number of autonomous
+                software principals taking real actions — merging code, moving money, provisioning
+                infrastructure, calling other systems — is growing, and we don't see the trend reversing. You
+                can disagree about the pace. The direction is hard to argue with. And a change in the number of
+                actors is not a quantitative detail; past a certain point it changes which controls are
+                viable.
+              </p>
+
+              <h2>Small numbers hide bad assumptions</h2>
+              <p>
+                When one carefully supervised agent holds a credential, a lot of shortcuts look fine. Broad
+                scopes are convenient. Reusable tokens are simpler. &ldquo;We'll review the logs if something
+                looks off&rdquo; is a plausible plan, because a human can actually watch one thing. None of
+                those assumptions survive contact with a fleet. Broad scopes multiply blast radius. Reusable
+                tokens multiply replay surface. And no one reviews the logs of ten thousand principals acting
+                every second — there is no one positioned in that last mile at all.
+              </p>
+              <p>
+                This is the pattern behind everything else we've written: capability over identity, authority
+                at the moment of execution, single-use by default, evidence you can verify without trusting
+                the issuer. Each is a modest, almost fussy discipline at the scale of one agent. Each becomes
+                structurally necessary at the scale we expect. The controls don't change. Their optionality
+                does.
+              </p>
+
+              <div class="invariant">
+                <p class="mono-label">The bet</p>
+                <p>
+                  Authorization for machine actions will follow the path other security primitives took:
+                  from optional, to expected, to assumed. The comfortable operators of large agent fleets will
+                  be the ones who moved early — quietly making exact-action authority the default.
+                </p>
+              </div>
+
+              <h2>Infrastructure, not a feature</h2>
+              <p>
+                We think machine authorization ends up looking less like a product feature and more like
+                plumbing — the way a certificate authority, an HSM, or an identity provider is plumbing.
+                Not something every team reinvents per application, but a shared authority plane that issues
+                exact-action grants, a protected execution path that consumes them, and a verifiable evidence
+                trail underneath. That is the shape we are building toward, and we are deliberate about
+                marking what is implemented today, what is limited, and what is still target architecture.
+              </p>
+              <p>
+                We are not claiming to know exactly how this settles. What we are confident about is the
+                pressure: more autonomous actions, taken faster, with fewer humans in the loop, against
+                systems where the wrong action is expensive to undo. In that world, &ldquo;the agent had
+                permission&rdquo; will not be an acceptable answer. &ldquo;This exact action presented valid,
+                specific, unconsumed authority, and here is the evidence&rdquo; will be.
+              </p>
+
+              <h2>What to do before you need it</h2>
+              <ul>
+                <li>Find the handful of actions that are genuinely irreversible, and require exact-action authority there first.</li>
+                <li>Treat reusable, broadly-scoped credentials as debt to pay down, not a permanent baseline.</li>
+                <li>Make sure &ldquo;prove it was authorized&rdquo; has an answer that doesn't depend on trusting your own log.</li>
+              </ul>
+              <p>
+                None of that requires betting on a specific future. It just requires taking the direction
+                seriously a little earlier than you strictly have to.
+              </p>
+
+              <div class="post-footer">
+                <p class="mono-label">Keep reading</p>
+                <div class="post-nav">
+                  <a class="inline-link" href="capability-not-identity.html">Capability, not identity &rarr;</a>
+                  <a class="inline-link" href="verifiable-evidence.html">Evidence you can verify &rarr;</a>
+                </div>
+                <p class="mt-2">
+                  <a class="button button-primary button-sm" href="../contact.html" data-track-group="cta" data-track-label="Request a technical pilot">Request a technical pilot</a>
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+      <footer class="site-footer" data-include="footer"></footer>
+    </div>
+  </body>
+</html>

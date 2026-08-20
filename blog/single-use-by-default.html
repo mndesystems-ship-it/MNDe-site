@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A grant that can be presented twice is a grant you have already lost control of. Why binding one nonce to one action, consumed exactly once, turns replay into a refused event instead of a silent success."
+    />
+    <meta name="theme-color" content="#111416" />
+    <meta property="og:title" content="Single-use by default | MNDe" />
+    <meta property="og:type" content="article" />
+    <title>Single-use by default: authority that cannot be replayed | MNDe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/site.css" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+    <link rel="canonical" href="https://mndesystems.com/blog/single-use-by-default.html" />
+    <script defer src="../assets/js/site.js"></script>
+  </head>
+  <body data-page="blog">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="site-header" data-include="header"></header>
+      <main id="main" class="page-main">
+        <section class="page-hero">
+          <div class="container post-header reveal">
+            <p class="post-meta">Design &middot; 9 Jul 2026</p>
+            <h1>Single-use by default: authority that cannot be replayed</h1>
+            <p class="lead">
+              A grant that can be presented twice is a grant you have already lost control of. Binding one
+              nonce to one action, consumed exactly once, makes replay a refused event instead of a silent
+              success.
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <article class="prose">
+              <p>
+                Reusability is a virtue almost everywhere in software — and a liability in authorization. A
+                token you can present again is a token that can be captured, delayed, and replayed. A grant
+                that survives its first use is authority still sitting on the table after the action it was
+                meant for is done. The safe default for consequential authority is the opposite of reusable:
+                <strong>single-use</strong>, bound to one action, consumed exactly once.
+              </p>
+
+              <h2>Replay is the quiet failure</h2>
+              <p>
+                The dangerous thing about replay is that nothing looks wrong. The signature verifies. The
+                scope matches. The action is one the holder is genuinely allowed to perform. The only anomaly
+                is that it happened <em>again</em> — and a system that only checks &ldquo;is this valid?&rdquo;
+                has no way to notice. Duplicate delivery, a retried request, a captured grant re-sent by an
+                attacker: to a stateless validator they are all the same legitimate-looking call.
+              </p>
+              <p>
+                Making authority single-use turns that quiet failure into a loud, refused event. Each grant
+                carries a nonce. Before the protected path acts, it atomically reserves that nonce in a
+                consumption ledger. The first presentation wins the reservation and proceeds; every later
+                presentation of the same nonce loses the race and is refused as replay. &ldquo;Exactly
+                once&rdquo; stops being a hope about the network and becomes a property the system enforces.
+              </p>
+
+              <div class="invariant">
+                <p class="mono-label">Invariant</p>
+                <p>
+                  One grant, one nonce, one action. Reserved-or-refused, atomically. A second presentation of
+                  a consumed nonce is a refusal — never a second execution.
+                </p>
+              </div>
+
+              <h2>What single-use is honest about</h2>
+              <p>
+                We are careful here. A browser demonstration can show one-winner selection as a reference; it
+                does not prove distributed linearizability under partition. Real single-use at scale is a
+                property of a deployed ledger with a genuine consistency story, and we mark that as target
+                work rather than claim it is solved by a client-side demo. The design principle, though, holds
+                regardless of maturity: authority should be spent, not held.
+              </p>
+
+              <h2>Why default matters</h2>
+              <p>
+                Plenty of systems <em>could</em> issue single-use credentials and simply don't, because the
+                reusable path is more convenient and the risk is invisible until it isn't. As more actions are
+                taken by software that retries aggressively, delegates freely, and runs unattended, the cost
+                of reusable authority stops being theoretical. Designing single-use as the default — the
+                thing you opt out of, not into — is how you keep replay from being a latent liability you
+                discover during an incident.
+              </p>
+
+              <div class="post-footer">
+                <p class="mono-label">Keep reading</p>
+                <div class="post-nav">
+                  <a class="inline-link" href="verifiable-evidence.html">Evidence you can verify &rarr;</a>
+                  <a class="inline-link" href="the-execution-gap.html">The execution gap &rarr;</a>
+                </div>
+                <p class="mt-2">
+                  <a class="button button-primary button-sm" href="../contact.html" data-track-group="cta" data-track-label="Request a technical pilot">Request a technical pilot</a>
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+      <footer class="site-footer" data-include="footer"></footer>
+    </div>
+  </body>
+</html>

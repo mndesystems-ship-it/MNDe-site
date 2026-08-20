@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Field notes on machine-authorization infrastructure: why consequential machine actions should execute only with valid, specific, unconsumed authority — and where that discipline is heading."
+    />
+    <meta name="theme-color" content="#111416" />
+    <meta property="og:title" content="Blog | MNDe" />
+    <meta
+      property="og:description"
+      content="Field notes on machine authorization: authority before execution, and where it is heading."
+    />
+    <meta property="og:type" content="website" />
+    <title>Blog | MNDe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/site.css" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+    <link rel="canonical" href="https://mndesystems.com/blog/" />
+    <script defer src="../assets/js/site.js"></script>
+  </head>
+  <body data-page="blog">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="site-header" data-include="header"></header>
+      <main id="main" class="page-main">
+        <section class="page-hero">
+          <div class="container reveal">
+            <p class="eyebrow">Field notes</p>
+            <h1>Authority before execution — in the open.</h1>
+            <p class="lead">
+              Short, technical arguments for one idea: no consequential machine action should execute unless
+              it presents valid, specific, unconsumed authority for that exact action. Below, why that
+              discipline matters now — and why we expect it to become table stakes.
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="post-list reveal">
+              <a class="post-card" href="capability-not-identity.html">
+                <span class="post-meta">Thesis &middot; 18 Aug 2026</span>
+                <h2>Capability, not identity, is the unit of machine trust</h2>
+                <p>
+                  Identity answers who is asking. It never answers whether this exact action, on this exact
+                  resource, right now, was authorized. As principals stop being people, that gap stops being academic.
+                </p>
+                <span class="post-more">Read &rarr;</span>
+              </a>
+
+              <a class="post-card" href="the-execution-gap.html">
+                <span class="post-meta">Architecture &middot; 30 Jul 2026</span>
+                <h2>The execution gap: &ldquo;it had permission&rdquo; is the wrong question</h2>
+                <p>
+                  A standing permission is a broad, ambient claim. Execution is a single, specific act. The
+                  interesting engineering lives in the distance between them — and it is only widening.
+                </p>
+                <span class="post-more">Read &rarr;</span>
+              </a>
+
+              <a class="post-card" href="single-use-by-default.html">
+                <span class="post-meta">Design &middot; 9 Jul 2026</span>
+                <h2>Single-use by default: authority that cannot be replayed</h2>
+                <p>
+                  A grant that can be presented twice is a grant you have already lost control of. Binding one
+                  nonce to one action makes replay a refused event instead of a silent success.
+                </p>
+                <span class="post-more">Read &rarr;</span>
+              </a>
+
+              <a class="post-card" href="verifiable-evidence.html">
+                <span class="post-meta">Evidence &middot; 18 Jun 2026</span>
+                <h2>Evidence you can verify without trusting us</h2>
+                <p>
+                  Two linked receipts — what was authorized, and what was executed — checkable offline against
+                  published keys. The point is to make our word unnecessary.
+                </p>
+                <span class="post-more">Read &rarr;</span>
+              </a>
+
+              <a class="post-card" href="many-agents.html">
+                <span class="post-meta">Outlook &middot; 27 May 2026</span>
+                <h2>Preparing for a world of many agents</h2>
+                <p>
+                  The count of non-human principals taking consequential actions only goes one direction.
+                  Controls that feel optional at one agent become load-bearing at ten thousand.
+                </p>
+                <span class="post-more">Read &rarr;</span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="site-footer" data-include="footer"></footer>
+    </div>
+  </body>
+</html>
