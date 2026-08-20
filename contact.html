@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Request a technical pilot of MNDe machine-authorization infrastructure, or reach the team directly."
+    />
+    <meta name="theme-color" content="#111416" />
+    <title>Contact | MNDe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="canonical" href="https://mndesystems.com/contact.html" />
+    <script defer src="assets/js/site.js"></script>
+  </head>
+  <body data-page="contact">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="site-header" data-include="header"></header>
+      <main id="main" class="page-main">
+        <section class="page-hero">
+          <div class="container reveal">
+            <p class="eyebrow">Contact</p>
+            <h1>Request a technical pilot</h1>
+            <p class="lead">
+              The pilot proves, on one authorized GitHub merge, that authority precedes execution —
+              and that it cannot be mutated, replayed, or bypassed. Reach out directly or use the
+              form below.
+            </p>
+            <p class="mt-2"><a class="inline-link" href="mailto:contact@mndesystems.com">contact@mndesystems.com</a> &middot; <a class="inline-link" href="tel:+12314209108">231-420-9108</a></p>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container contact-grid">
+            <div class="contact-panel reveal">
+              <h2>Direct</h2>
+              <p class="muted">Email</p>
+              <a class="inline-link" href="mailto:contact@mndesystems.com">contact@mndesystems.com</a>
+              <p class="muted mt-2">Phone</p>
+              <a class="inline-link" href="tel:+12314209108">231-420-9108</a>
+              <p class="muted mt-2">Pilot scope</p>
+              <p class="muted">GitHub protected-merge: exact-action grant, protected executor, credential dispossession, and linked evidence.</p>
+            </div>
+            <form class="contact-form reveal delay-1" id="contact-form" novalidate>
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required />
+
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+
+              <label for="intent">Intent</label>
+              <select id="intent" name="intent">
+                <option>Request a technical pilot</option>
+                <option>Architecture / security question</option>
+                <option>General inquiry</option>
+              </select>
+
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="6" required></textarea>
+
+              <button class="button button-primary" type="submit">Submit</button>
+              <p class="form-note" id="form-note" aria-live="polite"></p>
+            </form>
+          </div>
+        </section>
+      </main>
+      <footer class="site-footer" data-include="footer"></footer>
+    </div>
+  </body>
+</html>
