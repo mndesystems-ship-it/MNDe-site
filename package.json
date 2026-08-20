@@ -1,0 +1,9 @@
+{
+  "name": "mnde-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MNDe Systems — machine-authorization infrastructure site (static, GitHub Pages).",
+  "scripts": {
+    "test": "node --test"
+  }
+}

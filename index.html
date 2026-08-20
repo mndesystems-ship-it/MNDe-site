@@ -1,265 +1,672 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MNDe Systems</title>
-    <style>
-        :root {
-            --bg: #ffffff;
-            --text: #000000;
-            --border: #000000;
-            --mono: "Courier New", Courier, monospace;
-            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-        }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="MNDe is machine-authorization infrastructure. No consequential machine action executes unless it presents valid, specific, unconsumed authority for that exact action."
+    />
+    <meta name="theme-color" content="#111416" />
+    <meta property="og:title" content="MNDe — Authority before execution" />
+    <meta
+      property="og:description"
+      content="Machine-authorization infrastructure: exact-action grants, protected execution, credential dispossession, and linked, offline-verifiable evidence."
+    />
+    <meta property="og:type" content="website" />
+    <title>MNDe | Authority before execution</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="canonical" href="https://mndesystems.com/" />
+    <script defer src="assets/js/site.js"></script>
+    <script defer src="assets/js/evidence-core.js"></script>
+    <script defer src="assets/js/evidence-lab.js"></script>
+  </head>
+  <body data-page="product">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="site-header" data-include="header"></header>
+      <main id="main">
+        <!-- Hero -->
+        <section class="hero" id="top">
+          <div class="container">
+            <div class="reveal">
+              <p class="eyebrow">Machine-authorization infrastructure</p>
+              <h1>Authority before execution.</h1>
+              <p class="lead">
+                MNDe ensures that consequential machine actions execute only with valid, specific,
+                unconsumed authority for the exact requested action.
+              </p>
+            </div>
 
-        * {
-            box-sizing: border-box;
-        }
+            <div class="flow reveal delay-1" role="list" aria-label="Authorization chain">
+              <div class="flow-node" role="listitem">
+                <span class="flow-index">01</span><strong>Agent intent</strong>
+                <span class="flow-role">Principal requests an action</span>
+              </div>
+              <span class="flow-arrow" aria-hidden="true">→</span>
+              <div class="flow-node flow-node-accent" role="listitem">
+                <span class="flow-index">02</span><strong>MNDe authority plane</strong>
+                <span class="flow-role">Policy &amp; delegation</span>
+              </div>
+              <span class="flow-arrow" aria-hidden="true">→</span>
+              <div class="flow-node" role="listitem">
+                <span class="flow-index">03</span><strong>Exact-action grant</strong>
+                <span class="flow-role">Single-use, bound, expiring</span>
+              </div>
+              <span class="flow-arrow" aria-hidden="true">→</span>
+              <div class="flow-node" role="listitem">
+                <span class="flow-index">04</span><strong>Protected executor</strong>
+                <span class="flow-role">Consumes grant, acts</span>
+              </div>
+              <span class="flow-arrow" aria-hidden="true">→</span>
+              <div class="flow-node" role="listitem">
+                <span class="flow-index">05</span><strong>External system</strong>
+                <span class="flow-role">Via credential broker</span>
+              </div>
+              <span class="flow-arrow" aria-hidden="true">→</span>
+              <div class="flow-node" role="listitem">
+                <span class="flow-index">06</span><strong>Linked evidence</strong>
+                <span class="flow-role">Authorization + execution receipts</span>
+              </div>
+            </div>
 
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: var(--sans);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-        }
+            <div class="cluster mt-2 reveal delay-2">
+              <a class="button button-primary" href="contact.html" data-track-group="cta" data-track-label="Request a technical pilot">Request a technical pilot</a>
+              <a class="button button-secondary" href="#architecture">Inspect the architecture</a>
+            </div>
 
-        .container {
-            width: 100%;
-            max-width: 720px;
-            padding: 60px 20px;
-        }
+            <p class="disclaimer reveal delay-2">
+              MNDe distinguishes implemented reference components, limited paths, and target-state
+              controls. Production claims require deployment evidence. The status labels used
+              throughout this site are defined under
+              <a class="inline-link" href="#architecture">status discipline</a>.
+            </p>
+          </div>
+        </section>
 
-        section {
-            margin-bottom: 80px;
-            opacity: 0;
-            animation: fadeIn 1s ease-in forwards;
-        }
+        <!-- Product / buyer problem -->
+        <section class="section section-muted" id="product">
+          <div class="container">
+            <div class="section-heading reveal">
+              <p class="eyebrow">The buyer problem</p>
+              <h2>Monitoring an action is not the same as authorizing it.</h2>
+              <p class="lead">
+                Agents are increasingly given broad, standing credentials. Once an agent holds a
+                credential, it can act outside the authorization decision that was supposed to
+                constrain it. A signed audit record describes what happened — it does not, by
+                itself, prevent unauthorized execution.
+              </p>
+            </div>
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
+            <div class="grid grid-3 reveal delay-1">
+              <article class="card card-accent">
+                <h3>Standing credentials over-authorize</h3>
+                <p>An agent with a long-lived token can perform actions no one decided to allow, across every code path that token reaches.</p>
+              </article>
+              <article class="card card-accent">
+                <h3>Observation is not enforcement</h3>
+                <p>Prompt-injection detection, traffic inspection, and agent monitoring watch behavior. They do not gate the consequential action on specific authority.</p>
+              </article>
+              <article class="card card-accent">
+                <h3>Audit logs are after the fact</h3>
+                <p>A tamper-evident log is necessary for evidence, but a record written after execution cannot stop the execution it records.</p>
+              </article>
+            </div>
 
-        h1 {
-            font-size: 2.25rem;
-            font-weight: 800;
-            margin: 0 0 0.5rem 0;
-            letter-spacing: -0.03em;
-        }
+            <p class="invariant reveal delay-2">
+              Core invariant: <span>No consequential machine action executes unless it presents valid,
+              specific, unconsumed authority for that exact action.</span>
+            </p>
+            <p class="prose mt-2 reveal delay-2">
+              MNDe is positioned as authorization infrastructure — a certificate authority, HSM, and
+              tamper-evident black box for machine actions — not as another monitoring layer. The
+              enforceable form of the invariant is short: <strong>no valid grant, no protected execution.</strong>
+            </p>
+          </div>
+        </section>
 
-        h2 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin: 0 0 1.5rem 0;
-            font-family: var(--mono);
-            border-bottom: 2px solid var(--border);
-            display: inline-block;
-        }
+        <!-- Architecture -->
+        <section class="section" id="architecture">
+          <div class="container">
+            <div class="section-heading reveal">
+              <p class="eyebrow">Core architecture</p>
+              <h2>Principal → policy → grant → protected executor → broker → evidence.</h2>
+              <p class="prose">
+                Select a component to see its responsibility, trust boundary, input, output, failure
+                behavior, and implementation state. Nothing here is described as deployed unless its
+                status label says so.
+              </p>
+            </div>
 
-        .sub-header {
-            font-size: 1.25rem;
-            font-weight: 400;
-            margin-bottom: 2rem;
-            color: var(--text);
-        }
+            <div id="architecture-widget" class="selector reveal delay-1">
+              <noscript>
+                <p class="prose">The interactive architecture explorer requires JavaScript. Each component is also documented in the sections below.</p>
+              </noscript>
+            </div>
 
-        .lead-text {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-        }
+            <div class="mt-2 reveal delay-2">
+              <p class="eyebrow">Status discipline</p>
+              <div class="status-legend">
+                <article class="card">
+                  <span class="badge badge-implemented">Implemented / Reference</span>
+                  <p>A real reference artifact or executable implementation exists in this repository.</p>
+                </article>
+                <article class="card">
+                  <span class="badge badge-limited">Limited</span>
+                  <p>An interface or partial path exists, but the complete security boundary is not demonstrated.</p>
+                </article>
+                <article class="card">
+                  <span class="badge badge-target">Target</span>
+                  <p>Required end-state architecture that is not yet proven in production.</p>
+                </article>
+                <article class="card">
+                  <span class="badge badge-unproven">Unproven</span>
+                  <p>A security claim that still needs deployment evidence.</p>
+                </article>
+                <article class="card">
+                  <span class="badge badge-production">Production Verified</span>
+                  <p>Reserved. Used only when an authentic production artifact supports the claim. Currently unused.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
 
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 1.5rem 0;
-        }
+        <!-- Exact-action grant -->
+        <section class="section section-muted" id="grant">
+          <div class="container">
+            <div class="section-heading reveal">
+              <p class="eyebrow">Exact-action grant</p>
+              <h2>One action. One resource. One use.</h2>
+              <p class="prose">
+                A grant authorizes a single action against a single resource, with parameters bound
+                by a canonical digest, a short expiration, and a single-use nonce. Changing a
+                meaningful field produces a different grant identity — and fails verification.
+              </p>
+            </div>
 
-        ul li {
-            font-family: var(--mono);
-            font-size: 0.95rem;
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
+            <div class="table-scroll reveal delay-1">
+              <table class="data">
+                <caption>Illustrative exact-action grant. The Evidence Lab generates real digests and signatures in your browser.</caption>
+                <thead>
+                  <tr><th scope="col">Field</th><th scope="col">Value</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td class="field">grant_id</td><td class="mono">grant:9f2a71c4e0b8</td></tr>
+                  <tr><td class="field">execution_id</td><td class="mono">exec:4c81a0f7d219</td></tr>
+                  <tr><td class="field">actor</td><td class="mono">agent:payments-bot</td></tr>
+                  <tr><td class="field">principal</td><td class="mono">service:release-orchestrator</td></tr>
+                  <tr><td class="field">authority</td><td class="mono">delegated:release-merge</td></tr>
+                  <tr><td class="field">action</td><td class="mono">merge_pull_request</td></tr>
+                  <tr><td class="field">resource</td><td class="mono">github.com/acme/payments</td></tr>
+                  <tr><td class="field">environment</td><td class="mono">reference</td></tr>
+                  <tr><td class="field">canonical_param_digest</td><td class="mono">sha256:2b8f…c1a4 (illustrative)</td></tr>
+                  <tr><td class="field">limits</td><td class="mono">max_risk=medium; required_checks=[ci/build, ci/tests, security/scan]</td></tr>
+                  <tr><td class="field">policy_hash</td><td class="mono">sha256:7d3e…9f02 (illustrative)</td></tr>
+                  <tr><td class="field">delegation_tip</td><td class="mono">delegation:release-orchestrator-&gt;payments-bot</td></tr>
+                  <tr><td class="field">issued_at</td><td class="mono">2026-08-20T17:00:00Z</td></tr>
+                  <tr><td class="field">expires_at</td><td class="mono">2026-08-20T17:02:00Z</td></tr>
+                  <tr><td class="field">nonce</td><td class="mono">nonce:1f6b…8ad2 (single-use)</td></tr>
+                  <tr><td class="field">max_uses</td><td class="mono">1</td></tr>
+                  <tr><td class="field">issuer_key_id</td><td class="mono">key:authority-3ab1</td></tr>
+                  <tr><td class="field">sig_alg</td><td class="mono">ECDSA P-256 / SHA-256 (ES256)</td></tr>
+                  <tr><td class="field">signature</td><td class="mono">MEUCIQ…&lt;base64&gt; (illustrative)</td></tr>
+                </tbody>
+              </table>
+            </div>
 
-        ul li::before {
-            content: "—";
-            position: absolute;
-            left: 0;
-        }
+            <p class="eyebrow mt-2 reveal delay-1">Mutation invalidates the grant</p>
+            <div class="compare reveal delay-1">
+              <div class="compare-col">
+                <div class="compare-col-head">Authorized</div>
+                <pre>merge_pull_request(
+  repository=acme/payments,
+  pr=<span>4182</span>,
+  head_sha=a19f…,
+  method=squash
+)</pre>
+                <div class="compare-verdict"><span class="verdict verdict-allow">ALLOW</span> — matches the bound canonical digest.</div>
+              </div>
+              <div class="compare-col">
+                <div class="compare-col-head">Mutated</div>
+                <pre>merge_pull_request(
+  repository=acme/payments,
+  pr=<span class="diff">4183</span>,
+  head_sha=a19f…,
+  method=squash
+)</pre>
+                <div class="compare-verdict"><span class="verdict verdict-refuse">REFUSE / SCOPE_MISMATCH</span> — digest differs; provider never contacted.</div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-        .diagram {
-            font-family: var(--mono);
-            font-size: 0.85rem;
-            border: 1px solid var(--border);
-            padding: 2rem;
-            margin: 2rem 0;
-            text-align: center;
-            white-space: pre;
-            overflow-x: auto;
-        }
+        <!-- Lifecycle, delegation, revocation -->
+        <section class="section" id="lifecycle">
+          <div class="container">
+            <div class="section-heading reveal">
+              <p class="eyebrow">Grant lifecycle</p>
+              <h2>Requested → issued → reserved → consumed → executed → receipt.</h2>
+              <p class="prose">
+                A grant is single-use. Reservation and consumption are atomic, so under concurrent
+                presentation exactly one executor wins. Every path also has a terminal alternative.
+              </p>
+            </div>
+            <div id="lifecycle-widget" class="lifecycle reveal delay-1">
+              <noscript><p class="prose">The interactive lifecycle requires JavaScript.</p></noscript>
+            </div>
 
-        .footer {
-            border-top: 1px solid var(--border);
-            padding-top: 40px;
-            margin-top: 100px;
-            font-family: var(--mono);
-            font-size: 0.85rem;
-        }
+            <div class="grid grid-2 mt-2">
+              <article class="card reveal">
+                <span class="badge badge-limited">Limited</span>
+                <h3>Delegation attenuation</h3>
+                <p>Authority can be delegated, but only narrowed. A delegate can never exceed the authority of its delegator; the delegation-chain tip is bound into every grant and resolved during verification.</p>
+              </article>
+              <article class="card reveal delay-1">
+                <span class="badge badge-target">Target</span>
+                <h3>Revocation &amp; freshness</h3>
+                <p>Revoked delegation must fail closed. Verifiers must check revocation within a freshness window; a stale checkpoint yields <span class="verdict verdict-indeterminate">INDETERMINATE</span>, never a silent allow.</p>
+              </article>
+            </div>
+          </div>
+        </section>
 
-        .contact-info {
-            margin-top: 20px;
-        }
+        <!-- Credential dispossession & non-bypassability -->
+        <section class="section section-muted" id="dispossession">
+          <div class="container">
+            <div class="section-heading reveal">
+              <p class="eyebrow">Credential dispossession</p>
+              <h2>The agent never holds the upstream credential.</h2>
+            </div>
 
-        .contact-info div {
-            margin-bottom: 5px;
-        }
+            <div class="flow reveal delay-1" role="list" aria-label="Credential dispossession flow">
+              <div class="flow-node" role="listitem"><span class="flow-index">01</span><strong>Agent</strong><span class="flow-role">Requests authority</span></div>
+              <span class="flow-arrow" aria-hidden="true">→</span>
+              <div class="flow-node" role="listitem"><span class="flow-index">02</span><strong>Grant</strong><span class="flow-role">Issued to the request</span></div>
+              <span class="flow-arrow" aria-hidden="true">→</span>
+              <div class="flow-node flow-node-accent" role="listitem"><span class="flow-index">03</span><strong>Protected executor</strong><span class="flow-role">Validates &amp; consumes</span></div>
+              <span class="flow-arrow" aria-hidden="true">→</span>
+              <div class="flow-node" role="listitem"><span class="flow-index">04</span><strong>Credential broker</strong><span class="flow-role">Releases narrow credential</span></div>
+              <span class="flow-arrow" aria-hidden="true">→</span>
+              <div class="flow-node" role="listitem"><span class="flow-index">05</span><strong>Provider</strong><span class="flow-role">Accepts executor identity only</span></div>
+            </div>
 
-        a {
-            color: inherit;
-            text-decoration: underline;
-        }
+            <div class="grid grid-2 mt-2">
+              <article class="card reveal">
+                <h3>What dispossession requires</h3>
+                <ul class="prose">
+                  <li>The agent does not hold the upstream production credential.</li>
+                  <li>The agent cannot retrieve the credential from the broker.</li>
+                  <li>Only the protected executor identity is accepted by the external provider.</li>
+                </ul>
+              </article>
+              <article class="card reveal delay-1">
+                <span class="badge badge-target">Target</span>
+                <h3>Protected-path non-bypassability</h3>
+                <p>Non-bypassability must be enforced by provider permissions, identity policy, and network boundaries — <strong>not</strong> by voluntary SDK usage. Until a deployment enforces this, it is target-state, not a current fact.</p>
+              </article>
+            </div>
+          </div>
+        </section>
 
-        @media (max-width: 480px) {
-            h1 { font-size: 1.75rem; }
-            .diagram { font-size: 0.7rem; padding: 1rem; }
-        }
-    </style>
-</head>
-<body>
+        <!-- Receipts & offline verification -->
+        <section class="section" id="receipts">
+          <div class="container">
+            <div class="section-heading reveal">
+              <p class="eyebrow">Evidence</p>
+              <h2>Two signed receipts, cryptographically linked.</h2>
+              <p class="prose">
+                Authorization and execution are recorded as separate, independently signed objects
+                and bound together, so the record of what was authorized cannot silently diverge from
+                what was executed.
+              </p>
+            </div>
 
-<div class="container">
-    <!-- Section 1. Header -->
-    <section id="header">
-        <h1>MNDe Systems</h1>
-        <div class="sub-header">Execution control for expensive and irreversible compute</div>
-        <div class="lead-text">
-            We stop waste before it runs.<br>
-            We do not observe.<br>
-            We refuse execution.
-        </div>
-    </section>
+            <div class="grid grid-2 reveal delay-1">
+              <div class="code-panel">
+                <div class="code-panel-head"><span class="mono-label">Authorization receipt</span><span class="badge badge-limited">Limited</span></div>
+                <pre><span class="c">// signed by the authority key</span>
+{
+  <span class="k">"type"</span>: <span class="s">"authorization"</span>,
+  <span class="k">"statement"</span>: <span class="s">"MNDe authorized execution X</span>
+             <span class="s">under policy P using grant G"</span>,
+  <span class="k">"execution_id"</span>: <span class="s">"exec:4c81…"</span>,
+  <span class="k">"grant_hash"</span>: <span class="s">"sha256:…"</span>,
+  <span class="k">"policy_hash"</span>: <span class="s">"sha256:…"</span>,
+  <span class="k">"issuer_key_id"</span>: <span class="s">"key:authority-3ab1"</span>
+}</pre>
+              </div>
+              <div class="code-panel">
+                <div class="code-panel-head"><span class="mono-label">Execution receipt</span><span class="badge badge-limited">Limited</span></div>
+                <pre><span class="c">// signed by a separate executor key</span>
+{
+  <span class="k">"type"</span>: <span class="s">"execution"</span>,
+  <span class="k">"statement"</span>: <span class="s">"Executor Y used grant G for</span>
+             <span class="s">execution X and observed result Z"</span>,
+  <span class="k">"execution_id"</span>: <span class="s">"exec:4c81…"</span>,
+  <span class="k">"grant_hash"</span>: <span class="s">"sha256:…"</span>,
+  <span class="k">"authorization_receipt_hash"</span>: <span class="s">"sha256:…"</span>,
+  <span class="k">"result_hash"</span>: <span class="s">"sha256:…"</span>,
+  <span class="k">"executor_key_id"</span>: <span class="s">"key:executor-8ad2"</span>
+}</pre>
+              </div>
+            </div>
 
-    <!-- Section 2. What ACRL is -->
-    <section id="acrl">
-        <h2>ACRL. Authorization and Compute Refusal Layer.</h2>
-        <div class="lead-text">
-            ACRL operates at submit time.<br>
-            It evaluates declared intent.<br>
-            It enforces hard limits.<br>
-            If conditions fail, execution does not start.
-        </div>
-        
-        <div class="diagram">
-[ Declared Intent ] -> | ACRL GATE | -> [ Execution ]
-                         |
-                 [ Signed Refusal ]</div>
+            <div class="grid grid-2 mt-2">
+              <article class="card reveal">
+                <h3>Binding fields</h3>
+                <p class="mono-label">Linked by</p>
+                <ul class="prose">
+                  <li>execution_id</li>
+                  <li>grant_hash</li>
+                  <li>authorization_receipt_hash</li>
+                  <li>result_hash</li>
+                  <li>issuer / executor key id</li>
+                  <li>observation timestamp &amp; signature</li>
+                </ul>
+              </article>
+              <article class="card reveal delay-1">
+                <h3>Offline verification sequence</h3>
+                <ol class="prose">
+                  <li>Parse the bundle</li>
+                  <li>Canonicalize each object</li>
+                  <li>Validate the trust root</li>
+                  <li>Verify both signatures</li>
+                  <li>Resolve the delegation chain</li>
+                  <li>Check revocation freshness</li>
+                  <li>Confirm grant ↔ execution linkage</li>
+                  <li>Correlate the observed result</li>
+                  <li>Check witness inclusion</li>
+                  <li>Emit a final verdict</li>
+                </ol>
+              </article>
+            </div>
 
-        <ul>
-            <li>Synchronous.</li>
-            <li>Fail closed.</li>
-            <li>Pre allocation control.</li>
-            <li>Signed refusal record.</li>
-        </ul>
-    </section>
+            <div class="grid grid-2 mt-2">
+              <article class="card reveal">
+                <span class="badge badge-target">Target</span>
+                <h3>Witness checkpoints</h3>
+                <p>Independent witnesses and a transparency log provide inclusion and consistency proofs, so no single party can present a split view of the record.</p>
+              </article>
+              <article class="card reveal delay-1">
+                <span class="badge badge-limited">Limited</span>
+                <h3>Modular content-security inputs</h3>
+                <p>Optional content-risk adapters feed signals into policy evaluation. They inform the decision; they never replace the requirement for a valid, specific, unconsumed grant.</p>
+              </article>
+            </div>
+          </div>
+        </section>
 
-    <!-- Section 3. Why it exists -->
-    <section id="problem">
-        <h2>The cost problem.</h2>
-        <div class="lead-text">
-            Modern compute systems allow jobs to start before cost is understood.<br>
-            The bill appears after execution begins.<br>
-            ACRL moves control to the last safe point.
-        </div>
-        <ul>
-            <li>Bad jobs start easily.</li>
-            <li>Oversized requests pass silently.</li>
-            <li>Cost correction happens too late.</li>
-        </ul>
-    </section>
+        <!-- Integrations: GitHub protected merge -->
+        <section class="section section-muted" id="integrations">
+          <div class="container">
+            <div class="section-heading reveal">
+              <p class="eyebrow">Reference integration</p>
+              <h2>GitHub protected-merge.</h2>
+              <p class="prose">
+                The first concrete integration binds authorization to a single pull-request merge.
+                Select a scenario to see the expected verdict, whether the provider is contacted, and
+                why. Provider calls are labeled reference behavior — no external system is contacted
+                from this page.
+              </p>
+            </div>
 
-    <!-- Section 4. Where it lives -->
-    <section id="boundary">
-        <h2>Integration boundary.</h2>
-        <div class="lead-text">
-            ACRL integrates at execution submission points.<br>
-            It does not inspect runtime behavior.<br>
-            It does not monitor models.
-        </div>
-        <ul>
-            <li>Slurm submit hooks.</li>
-            <li>Batch schedulers.</li>
-            <li>Privileged service accounts.</li>
-            <li>Any path where intent becomes spend.</li>
-        </ul>
-    </section>
+            <div class="grid grid-2 reveal delay-1">
+              <article class="card">
+                <h3>Bound authorization fields</h3>
+                <ul class="prose">
+                  <li>Repository &amp; pull-request number</li>
+                  <li>Expected head commit</li>
+                  <li>Base branch &amp; merge method</li>
+                  <li>Required checks &amp; risk ceiling</li>
+                  <li>Execution id &amp; expiration</li>
+                  <li>Single-use nonce (max uses)</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>Authorized flow</h3>
+                <p class="prose">
+                  Agent requests permission to merge a specific pull request → MNDe evaluates policy
+                  and delegation → issues an exact-action grant → the protected executor atomically
+                  consumes it → the credential broker releases a GitHub App installation credential to
+                  the executor → the executor merges the exact authorized commit → MNDe emits linked
+                  authorization and execution receipts.
+                </p>
+              </article>
+            </div>
 
-    <!-- Section 5. Orbit relationship -->
-    <section id="orbit">
-        <h2>Orbit protocol.</h2>
-        <div class="lead-text">
-            Orbit defines deterministic intent.<br>
-            ACRL enforces release or refusal.
-        </div>
-        <ul>
-            <li>Intent is signed.</li>
-            <li>Rules are explicit.</li>
-            <li>Outcomes are binary.</li>
-        </ul>
-    </section>
+            <div id="integration-widget" class="lifecycle mt-2 reveal delay-1">
+              <noscript><p class="prose">The interactive scenarios require JavaScript.</p></noscript>
+            </div>
+          </div>
+        </section>
 
-    <!-- Section 6. Observed numbers -->
-    <section id="data">
-        <h2>Production data.</h2>
-        <div class="lead-text">
-            The following numbers reflect submit time refusals only.<br>
-            They represent upper bound prevented spend.<br>
-            No extrapolation is applied.
-        </div>
-        <ul>
-            <li>Two to four percent of submitted jobs refused during early deployment.</li>
-            <li>One to two percent refusal rate after behavioral correction.</li>
-            <li>Low six figure annual prevented spend on a single production cluster.</li>
-            <li>Zero impact on training quality or throughput reported.</li>
-            <li>No runtime inspection performed.</li>
-        </ul>
-    </section>
+        <!-- Evidence Lab -->
+        <section class="section" id="evidence">
+          <div class="container">
+            <div class="section-heading reveal">
+              <p class="eyebrow">Implementation Evidence Lab</p>
+              <h2>Real cryptography, honest labels.</h2>
+              <p class="prose">
+                This lab runs ECDSA P-256 / SHA-256 locally in your browser. It generates separate
+                authority and executor keys, canonicalizes and hashes an exact-action request, signs
+                two linked receipts, verifies them, detects a parameter mutation, and exports a
+                downloadable evidence bundle. Its source lives in this repository.
+              </p>
+            </div>
 
-    <!-- Section 7. Limits -->
-    <section id="limits">
-        <h2>What this does not do.</h2>
-        <ul>
-            <li>Does not monitor execution.</li>
-            <li>Does not optimize workloads.</li>
-            <li>Does not predict outcomes.</li>
-            <li>Does not claim savings beyond refused jobs.</li>
-        </ul>
-    </section>
+            <div class="lab reveal delay-1" id="lab">
+              <div class="lab-head">
+                <span class="mono-label">Browser reference evidence — not production deployment evidence</span>
+                <span class="badge badge-target">Reference</span>
+              </div>
+              <div class="lab-body">
+                <div class="lab-controls">
+                  <button class="button button-primary button-sm" type="button" id="lab-run">Run full sequence</button>
+                  <button class="button button-secondary button-sm" type="button" id="lab-mutate">Run with mutation</button>
+                  <button class="button button-secondary button-sm" type="button" id="lab-export">Export evidence bundle</button>
+                  <button class="button button-secondary button-sm" type="button" id="lab-clear">Clear</button>
+                </div>
+                <p class="lab-note">
+                  The exported JSON contains public verification material and an explicit list of
+                  limitations. The production-verified count is zero: a browser simulation is never
+                  labeled production verified.
+                </p>
 
-    <!-- Section 8. Closing statement -->
-    <section id="closing">
-        <div class="lead-text">
-            ACRL is a hard boundary.<br>
-            It exists to say no before cost occurs.<br>
-            It is intentionally narrow.
-        </div>
-    </section>
+                <div>
+                  <p class="mono-label">Acceptance controls</p>
+                  <div class="controls-list" id="lab-controls"></div>
+                </div>
 
-    <!-- Section 9. Footer -->
-    <footer class="footer">
-        <div>MNDe Systems builds deterministic control for execution boundaries.</div>
-        <div class="contact-info">
-            <div>Contact information only.</div>
-            <div>Email: <a href="mailto:MNDeproject@proton.me">MNDeproject@proton.me</a></div>
-            <div>Phone: 231-420-9108</div>
-        </div>
-    </footer>
-</div>
+                <div>
+                  <p class="mono-label">Console</p>
+                  <pre class="lab-console" id="lab-console" aria-live="polite" tabindex="0"></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-</body>
+        <!-- Security: threat & failure scenarios -->
+        <section class="section section-muted" id="security">
+          <div class="container">
+            <div class="section-heading reveal">
+              <p class="eyebrow">Attack &amp; failure scenarios</p>
+              <h2>What each failure does, and where it is caught.</h2>
+              <p class="prose">
+                For every scenario: the violated invariant, the detection point, the enforcement
+                point, the expected verdict, whether the provider call begins, the evidence emitted,
+                and the residual risk. Nothing here claims a red-team result — these are the designed
+                behaviors and their honest current limits.
+              </p>
+            </div>
+            <div id="threats-widget" class="reveal delay-1">
+              <noscript><p class="prose">The interactive scenario list requires JavaScript.</p></noscript>
+            </div>
+          </div>
+        </section>
+
+        <!-- Roadmap -->
+        <section class="section" id="roadmap">
+          <div class="container">
+            <div class="section-heading reveal">
+              <p class="eyebrow">Implementation blueprint</p>
+              <h2>From authority boundary to ecosystem.</h2>
+              <p class="prose">Build order, most security-critical first.</p>
+            </div>
+
+            <div class="blueprint reveal delay-1">
+              <article class="phase">
+                <span class="phase-tag">P0</span>
+                <h3>Authority boundary</h3>
+                <ul>
+                  <li>Canonical request schema</li>
+                  <li>Exact-action grant</li>
+                  <li>Deterministic hashing</li>
+                  <li>Signature profile</li>
+                  <li>Atomic consumption ledger</li>
+                  <li>Protected GitHub executor</li>
+                  <li>Credential broker</li>
+                  <li>Provider-enforced non-bypassability</li>
+                  <li>Negative-path test suite</li>
+                </ul>
+              </article>
+              <article class="phase">
+                <span class="phase-tag">P1</span>
+                <h3>Independent evidence</h3>
+                <ul>
+                  <li>Dual receipts</li>
+                  <li>Offline verifier</li>
+                  <li>Delegation chains</li>
+                  <li>Operator review workflow</li>
+                  <li>Key lifecycle</li>
+                  <li>Evidence-bundle export</li>
+                </ul>
+              </article>
+              <article class="phase">
+                <span class="phase-tag">P2</span>
+                <h3>Resilience</h3>
+                <ul>
+                  <li>Signed revocation service</li>
+                  <li>Freshness policy</li>
+                  <li>Transparency log</li>
+                  <li>Merkle proofs</li>
+                  <li>Independent witnesses</li>
+                  <li>High-availability executor domains</li>
+                  <li>Failure-recovery tests</li>
+                </ul>
+              </article>
+              <article class="phase">
+                <span class="phase-tag">P3</span>
+                <h3>Ecosystem</h3>
+                <ul>
+                  <li>AWS executor</li>
+                  <li>Payment executor</li>
+                  <li>Database executor</li>
+                  <li>Deployment executor</li>
+                  <li>Content-security adapters</li>
+                  <li>Policy portability</li>
+                  <li>External trust federation</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="section-heading mt-2 reveal">
+              <p class="eyebrow">Buyer-facing proof requirements</p>
+              <h2>Every claim carries its evidence status.</h2>
+            </div>
+            <div class="table-scroll reveal delay-1">
+              <table class="data">
+                <caption>Representative claims and the artifacts required to move each from reference to production.</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Claim</th>
+                    <th scope="col">Required artifact</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Remaining blocker</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Agent cannot access the provider credential</td>
+                    <td>Agent secret inventory + broker audit log</td>
+                    <td><span class="badge badge-target">Target</span></td>
+                    <td>Deployed broker with enforced isolation</td>
+                  </tr>
+                  <tr>
+                    <td>Direct provider bypass is denied</td>
+                    <td>Failed direct-call transcript + provider permission export</td>
+                    <td><span class="badge badge-unproven">Unproven</span></td>
+                    <td>Provider-enforced executor identity</td>
+                  </tr>
+                  <tr>
+                    <td>Grants are single-use under concurrency</td>
+                    <td>Linearizability history + provider request log</td>
+                    <td><span class="badge badge-limited">Limited</span></td>
+                    <td>Deployed ledger test</td>
+                  </tr>
+                  <tr>
+                    <td>Receipts verify offline</td>
+                    <td>Signed receipt bundle + offline-verifier output</td>
+                    <td><span class="badge badge-implemented">Reference</span></td>
+                    <td>Independent verifier packaging</td>
+                  </tr>
+                  <tr>
+                    <td>Revocation is timely</td>
+                    <td>Revocation timing trace</td>
+                    <td><span class="badge badge-target">Target</span></td>
+                    <td>Deployed revocation service</td>
+                  </tr>
+                  <tr>
+                    <td>Record cannot be split</td>
+                    <td>Witness signatures + inclusion/consistency proofs</td>
+                    <td><span class="badge badge-target">Target</span></td>
+                    <td>Independent witnesses</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Pilot -->
+        <section class="section section-muted" id="pilot">
+          <div class="container container-narrow">
+            <div class="pilot reveal">
+              <p class="eyebrow">Technical pilot</p>
+              <h2>Prove the boundary on one merge.</h2>
+              <p class="prose mt-2">
+                The pilot centers on the GitHub protected-merge integration. The objective:
+              </p>
+              <ul>
+                <li>An automated agent can merge one specifically authorized pull request.</li>
+                <li>It cannot mutate or replay that authority.</li>
+                <li>It cannot access the GitHub credential.</li>
+                <li>It cannot bypass the protected executor.</li>
+              </ul>
+              <p class="prose">
+                Success is measured against those four conditions with the evidence artifacts listed
+                under proof requirements. If a condition is not yet demonstrable, the pilot reports it
+                as such rather than claiming it.
+              </p>
+              <div class="cluster mt-2">
+                <a class="button button-primary" href="contact.html" data-track-group="cta" data-track-label="Request a technical pilot">Request a technical pilot</a>
+                <a class="button button-secondary" href="#evidence">Open the Evidence Lab</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="site-footer" data-include="footer"></footer>
+    </div>
+  </body>
 </html>
