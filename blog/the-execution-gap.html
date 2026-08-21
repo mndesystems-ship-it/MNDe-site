@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A standing permission is a broad, ambient claim. Execution is a single, specific act. The execution gap is the distance between them — and why authorization belongs at the moment of action."
+    />
+    <meta name="theme-color" content="#111416" />
+    <meta property="og:title" content="The execution gap | MNDe" />
+    <meta property="og:type" content="article" />
+    <title>The execution gap: &ldquo;it had permission&rdquo; is the wrong question | MNDe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/site.css" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+    <link rel="canonical" href="https://mndesystems.com/blog/the-execution-gap.html" />
+    <script defer src="../assets/js/site.js"></script>
+  </head>
+  <body data-page="blog">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="site-header" data-include="header"></header>
+      <main id="main" class="page-main">
+        <section class="page-hero">
+          <div class="container post-header reveal">
+            <p class="post-meta">Architecture &middot; 30 Jul 2026</p>
+            <h1>The execution gap: &ldquo;it had permission&rdquo; is the wrong question</h1>
+            <p class="lead">
+              A standing permission is a broad, ambient claim. Execution is a single, specific act. The
+              interesting — and increasingly dangerous — engineering lives in the distance between them.
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <article class="prose">
+              <p>
+                When something goes wrong with an automated action, the first question in the incident review
+                is almost always: <em>did it have permission?</em> And the honest answer is almost always
+                yes. The credential was valid. The scope covered the operation. By the rules of the system,
+                nothing was violated. That is precisely the problem. &ldquo;It had permission&rdquo; describes
+                a broad capacity to act. The incident is about one specific act. Those are not the same
+                object, and treating them as the same is where the risk hides.
+              </p>
+
+              <h2>Two different things wearing the same word</h2>
+              <p>
+                A permission is a standing, ambient property: a role, a scope, a token that remains true
+                across many actions and much time. An execution is a point event: this call, these exact
+                parameters, this moment. Classic access control checks the standing property and then lets an
+                unbounded number of point events flow underneath it. Between the check and the act, anything
+                the scope permits is fair game — including things no operator would have approved if asked
+                about them one at a time.
+              </p>
+              <p>
+                We call that space the <strong>execution gap</strong>. It is not a bug in any particular
+                system; it is a structural consequence of authorizing capacity instead of acts. When a human
+                held the credential and clicked once, the gap was small and a person's judgment sat inside it.
+                When software holds the credential and acts thousands of times unattended, the gap is where
+                mistakes, confusion, and abuse compound silently.
+              </p>
+
+              <div class="invariant">
+                <p class="mono-label">The reframe</p>
+                <p>
+                  Stop asking whether the actor <em>had permission</em>. Ask whether <em>this exact
+                  action</em> presented valid, specific, unconsumed authority at the moment it executed. If it
+                  did not, it does not run.
+                </p>
+              </div>
+
+              <h2>Closing the gap</h2>
+              <p>
+                The execution gap closes when authority is evaluated at the act, not upstream of it. Concretely
+                that means an action carries a grant bound to its exact parameters; a protected path validates
+                and atomically consumes that grant before it does anything consequential; and the decision is
+                recorded as evidence. The check is no longer &ldquo;is this actor allowed things like
+                this?&rdquo; but &ldquo;is <em>this</em> the authorized action, and has it already been
+                spent?&rdquo;
+              </p>
+              <p>
+                The parts of this that are demonstrable today — canonical parameter binding, exact-action
+                grants, refusal on mismatch — we ship and let you run. The parts that depend on a real
+                deployment enforcing non-bypassability, we label as target architecture rather than claim.
+                The discipline is the same either way: narrow the window in which capacity substitutes for a
+                decision.
+              </p>
+
+              <h2>Why this pressure keeps rising</h2>
+              <p>
+                Every increment of autonomy widens the execution gap. More actions per credential, more
+                delegation between principals, fewer humans positioned to catch the wrong last mile. We
+                don't think the answer is to slow autonomy down — it is genuinely useful. We think the answer
+                is to make the moment of execution the place where authority is proven, so that scaling the
+                number of actions does not mean scaling the amount of unchecked trust.
+              </p>
+
+              <div class="post-footer">
+                <p class="mono-label">Keep reading</p>
+                <div class="post-nav">
+                  <a class="inline-link" href="single-use-by-default.html">Single-use by default &rarr;</a>
+                  <a class="inline-link" href="capability-not-identity.html">Capability, not identity &rarr;</a>
+                </div>
+                <p class="mt-2">
+                  <a class="button button-primary button-sm" href="../contact.html" data-track-group="cta" data-track-label="Request a technical pilot">Request a technical pilot</a>
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+      <footer class="site-footer" data-include="footer"></footer>
+    </div>
+  </body>
+</html>

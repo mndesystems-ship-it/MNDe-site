@@ -151,16 +151,9 @@ svg {
 }
 
 .brand-mark {
-  width: 2.2rem;
-  height: 2.2rem;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--cyan-line);
-  border-radius: var(--radius-sm);
-  background: var(--cyan-dim);
-  color: var(--cyan-bright);
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  height: 2rem;
+  width: auto;
+  display: block;
 }
 
 .brand-text strong,
@@ -1209,6 +1202,13 @@ table.data td.mono {
   font-size: 1rem;
 }
 
+.footer-logo {
+  width: min(300px, 100%);
+  height: auto;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
 .footer-brand span {
   color: var(--muted);
   font-size: 0.85rem;
@@ -1393,4 +1393,112 @@ table.data td.mono {
   .cta-stack .button { width: 100%; }
   .control-row { grid-template-columns: 1.4rem minmax(0, 1fr); }
   .control-row .result-tag { grid-column: 2; justify-self: start; }
+}
+
+/* ---------- Blog ---------- */
+.post-list {
+  display: grid;
+  gap: 1.1rem;
+  margin-top: 2.2rem;
+}
+
+.post-card {
+  display: grid;
+  gap: 0.55rem;
+  align-content: start;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.post-card:hover {
+  border-color: var(--cyan-line);
+  transform: translateY(-2px);
+}
+
+.post-meta {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.post-card h2 {
+  font-size: 1.18rem;
+  letter-spacing: -0.01em;
+}
+
+.post-card p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.post-card .post-more {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--cyan);
+}
+
+.post-header {
+  max-width: 760px;
+}
+
+.post-header .post-meta {
+  margin-bottom: 0.9rem;
+}
+
+.prose {
+  max-width: 720px;
+  color: var(--text);
+}
+
+.prose p,
+.prose li {
+  color: #cdd4d5;
+  line-height: 1.75;
+  font-size: 1rem;
+}
+
+.prose h2 {
+  font-size: 1.3rem;
+  margin: 2.4rem 0 0.9rem;
+  letter-spacing: -0.01em;
+}
+
+.prose h3 {
+  font-size: 1.05rem;
+  margin: 1.8rem 0 0.6rem;
+}
+
+.prose ul {
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.prose strong {
+  color: var(--text);
+}
+
+.prose .inline-link {
+  font-weight: 500;
+}
+
+.post-footer {
+  margin-top: 3rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--line-soft);
+}
+
+.post-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.4rem;
+  margin-top: 1rem;
 }

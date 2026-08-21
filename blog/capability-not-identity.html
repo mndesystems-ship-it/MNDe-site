@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Identity says who is asking. It never says whether this exact action was authorized. Why capability — an exact-action grant — is the right unit of machine trust as principals stop being people."
+    />
+    <meta name="theme-color" content="#111416" />
+    <meta property="og:title" content="Capability, not identity, is the unit of machine trust | MNDe" />
+    <meta property="og:type" content="article" />
+    <title>Capability, not identity, is the unit of machine trust | MNDe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/site.css" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+    <link rel="canonical" href="https://mndesystems.com/blog/capability-not-identity.html" />
+    <script defer src="../assets/js/site.js"></script>
+  </head>
+  <body data-page="blog">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="site-header" data-include="header"></header>
+      <main id="main" class="page-main">
+        <section class="page-hero">
+          <div class="container post-header reveal">
+            <p class="post-meta">Thesis &middot; 18 Aug 2026</p>
+            <h1>Capability, not identity, is the unit of machine trust</h1>
+            <p class="lead">
+              Identity answers who is asking. It never answers whether <em>this</em> exact action, on
+              <em>this</em> exact resource, right now, was authorized. As the principals taking actions stop
+              being people, that gap stops being academic.
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <article class="prose">
+              <p>
+                Most access control still answers a question from a human-shaped world: <strong>who are
+                you, and what role do you hold?</strong> Prove the identity, look up the role, and a broad
+                bundle of standing permissions follows. That model has carried us a long way. It was designed
+                for a small number of durable principals, acting slowly, who could be held accountable after
+                the fact.
+              </p>
+              <p>
+                Autonomous software breaks all three assumptions at once. The principals are numerous and
+                short-lived. They act in milliseconds, in bursts, across systems no single reviewer watches.
+                And &ldquo;accountable after the fact&rdquo; is cold comfort when the fact is an irreversible
+                merge, transfer, or deployment. Identity tells you the request came from a credential you
+                once trusted. It does not tell you the action in front of you is the action you meant to
+                allow.
+              </p>
+
+              <h2>The question identity cannot answer</h2>
+              <p>
+                Consider a credential scoped to &ldquo;can merge pull requests.&rdquo; It authenticates. It
+                even authorizes, in the coarse sense. But it says nothing about <em>which</em> pull request,
+                <em>which</em> head commit, <em>which</em> base branch, or whether this is the first time the
+                action has been attempted. A leaked or confused agent holding that credential is,
+                permission-wise, indistinguishable from a legitimate one. The system has no place to stand.
+              </p>
+              <p>
+                Capability inverts the model. Instead of asking who you are and inferring what you may do, it
+                requires you to present authority for the specific act: a signed <strong>exact-action
+                grant</strong> that names one action, one resource, a canonical digest of its parameters, a
+                short expiration, and a single-use nonce. The unit of trust is not the actor. It is the act.
+              </p>
+
+              <div class="invariant">
+                <p class="mono-label">Invariant</p>
+                <p>
+                  No consequential machine action executes unless it presents valid, specific, unconsumed
+                  authority for that exact action. Identity is an input to issuing that authority — never a
+                  substitute for it.
+                </p>
+              </div>
+
+              <h2>Why the shift is not optional for long</h2>
+              <p>
+                It is tempting to treat exact-action authority as belt-and-suspenders — nice for the highest
+                risk paths, overkill everywhere else. We think that framing has a shelf life. Every trend in
+                how software acts points the same way: more autonomous principals, more delegation between
+                them, more actions taken without a human in the loop to sanity-check the last mile. Each of
+                those makes ambient, identity-shaped permission a little more dangerous and a little harder to
+                reason about.
+              </p>
+              <p>
+                We are not predicting a dramatic break. We are describing a slope. The organizations that will
+                be comfortable operating fleets of agents are the ones that, quietly and early, moved the
+                unit of trust from &ldquo;who&rdquo; to &ldquo;which exact action&rdquo; — and built the
+                evidence to prove it.
+              </p>
+
+              <h2>What this looks like in practice</h2>
+              <ul>
+                <li>Authority is minted per action, not held as a standing role.</li>
+                <li>The parameters that were authorized are bound cryptographically, so they cannot drift.</li>
+                <li>A grant is consumed exactly once; a second presentation is refused, not honored.</li>
+                <li>Every decision leaves a receipt that can be verified without trusting the issuer.</li>
+              </ul>
+              <p>
+                None of this removes identity — you still need to know who may <em>request</em> authority.
+                It relocates the real decision to the moment of action, where the stakes actually are.
+              </p>
+
+              <div class="post-footer">
+                <p class="mono-label">Keep reading</p>
+                <div class="post-nav">
+                  <a class="inline-link" href="the-execution-gap.html">The execution gap &rarr;</a>
+                  <a class="inline-link" href="many-agents.html">Preparing for a world of many agents &rarr;</a>
+                </div>
+                <p class="mt-2">
+                  <a class="button button-primary button-sm" href="../contact.html" data-track-group="cta" data-track-label="Request a technical pilot">Request a technical pilot</a>
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+      <footer class="site-footer" data-include="footer"></footer>
+    </div>
+  </body>
+</html>

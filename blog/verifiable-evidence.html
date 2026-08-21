@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Two linked receipts — what was authorized, and what was executed — verifiable offline against published keys. Why evidence that makes the vendor's word unnecessary is the right design goal."
+    />
+    <meta name="theme-color" content="#111416" />
+    <meta property="og:title" content="Evidence you can verify without trusting us | MNDe" />
+    <meta property="og:type" content="article" />
+    <title>Evidence you can verify without trusting us | MNDe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/site.css" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+    <link rel="canonical" href="https://mndesystems.com/blog/verifiable-evidence.html" />
+    <script defer src="../assets/js/site.js"></script>
+  </head>
+  <body data-page="blog">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="site-header" data-include="header"></header>
+      <main id="main" class="page-main">
+        <section class="page-hero">
+          <div class="container post-header reveal">
+            <p class="post-meta">Evidence &middot; 18 Jun 2026</p>
+            <h1>Evidence you can verify without trusting us</h1>
+            <p class="lead">
+              Two linked receipts — what was authorized, and what was executed — checkable offline against
+              published keys. The design goal is to make our word unnecessary.
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <article class="prose">
+              <p>
+                Most audit trails ask you to trust the system that produced them. The log says the right
+                thing happened; believing it means believing the logger was honest and uncompromised at the
+                moment it wrote. For low-stakes bookkeeping that is fine. For authority over consequential
+                actions, &ldquo;trust our log&rdquo; is exactly the assumption you were trying to avoid. Better
+                evidence is evidence you can check yourself, offline, without the issuer in the loop.
+              </p>
+
+              <h2>Two receipts, cryptographically linked</h2>
+              <p>
+                The model is deliberately simple. An <strong>authorization receipt</strong> records the
+                decision: MNDe authorized execution&nbsp;X under policy&nbsp;P using grant&nbsp;G. An
+                <strong>execution receipt</strong> records the act: executor&nbsp;Y used grant&nbsp;G for
+                execution&nbsp;X and observed result&nbsp;Z. Each is independently signed. They are bound
+                together by execution id, grant hash, and result hash, so you cannot hold up one without the
+                other, and you cannot alter either without breaking the link.
+              </p>
+              <p>
+                Given the two receipts and the published trust roots, a verifier can confirm — with no live
+                connection to us — that a specific action was authorized under a specific policy, that it was
+                the exact action executed, and that the observed result is the one bound into the record. A
+                broken link or an invalid signature fails verification. There is no &ldquo;trust me&rdquo; step
+                left to lean on.
+              </p>
+
+              <div class="invariant">
+                <p class="mono-label">Design goal</p>
+                <p>
+                  Evidence should be verifiable against published keys, offline, by someone who does not trust
+                  the party that produced it. If checking the record requires trusting the recorder, it is not
+                  yet evidence.
+                </p>
+              </div>
+
+              <h2>Where we draw the honest line</h2>
+              <p>
+                Signed, linked receipts get you tamper-evidence: you can tell if the record was altered. They
+                do not, by themselves, get you tamper-<em>resistance</em> against a party that simply withholds
+                or presents a split view of history. Closing that requires independent witnesses and a
+                transparency log with inclusion and consistency proofs — turning &ldquo;trust the log&rdquo;
+                into &ldquo;verify the log against observers who don't collude.&rdquo; We treat that witnessing
+                layer as target architecture, and we say so rather than imply it already ships.
+              </p>
+
+              <h2>Why verifiable evidence is becoming the ask</h2>
+              <p>
+                As more consequential actions are taken by software, &ldquo;show me it was authorized&rdquo;
+                stops being an internal nicety and starts being something counterparties, auditors, and
+                regulators will reasonably expect. Systems that can hand over independently checkable evidence
+                — rather than a log you have to take on faith — will have a much easier decade. Building for
+                that expectation now is cheaper than retrofitting it under pressure later.
+              </p>
+
+              <div class="post-footer">
+                <p class="mono-label">Keep reading</p>
+                <div class="post-nav">
+                  <a class="inline-link" href="many-agents.html">Preparing for a world of many agents &rarr;</a>
+                  <a class="inline-link" href="single-use-by-default.html">Single-use by default &rarr;</a>
+                </div>
+                <p class="mt-2">
+                  <a class="button button-primary button-sm" href="../contact.html" data-track-group="cta" data-track-label="Request a technical pilot">Request a technical pilot</a>
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+      <footer class="site-footer" data-include="footer"></footer>
+    </div>
+  </body>
+</html>
