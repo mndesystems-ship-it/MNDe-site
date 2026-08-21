@@ -125,7 +125,7 @@ function renderFooter() {
   footer.innerHTML = `
     <div class="container footer-shell">
       <div class="footer-brand">
-        <strong>MNDe Systems</strong>
+        <img class="footer-logo" src="${basePath}assets/img/mnde-logo.svg" alt="MNDe — Every execution. Verified." width="700" height="210" />
         <span>Authority before execution. No consequential machine action executes without valid, specific, unconsumed authority for that exact action.</span>
         <span class="footer-contact"><a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a></span>
         <span class="footer-contact"><a href="tel:+12314209108">231-420-9108</a></span>
