@@ -163,6 +163,12 @@ svg {
   letter-spacing: -0.02em;
 }
 
+.brand-mark-img {
+  width: auto;
+  height: 2rem;
+  display: block;
+}
+
 .brand-text strong,
 .brand-text span {
   display: block;
@@ -1201,8 +1207,16 @@ table.data td.mono {
 
 .footer-brand {
   display: grid;
-  gap: 0.35rem;
-  max-width: 320px;
+  gap: 0.55rem;
+  max-width: 360px;
+}
+
+.footer-lockup {
+  width: 240px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 0.2rem;
 }
 
 .footer-brand strong {
@@ -1393,4 +1407,105 @@ table.data td.mono {
   .cta-stack .button { width: 100%; }
   .control-row { grid-template-columns: 1.4rem minmax(0, 1fr); }
   .control-row .result-tag { grid-column: 2; justify-self: start; }
+}
+
+/* ---------- Blog ---------- */
+
+.blog-list {
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+a.blog-card {
+  text-decoration: none;
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+a.blog-card:hover,
+a.blog-card:focus-visible {
+  border-color: var(--cyan-line);
+  outline: none;
+}
+
+.blog-card h2 {
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+}
+
+.post-cat {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.post-cat .post-dot {
+  color: var(--muted);
+  margin: 0 0.4rem;
+}
+
+.post-cat time {
+  color: var(--muted);
+}
+
+.post-read {
+  color: var(--cyan);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.post-body {
+  max-width: 44rem;
+}
+
+.post-body h2 {
+  margin: 2.2rem 0 0.7rem;
+  font-size: 1.4rem;
+}
+
+.post-body p {
+  margin-bottom: 1.05rem;
+  color: var(--muted);
+}
+
+.post-body p strong {
+  color: var(--text);
+}
+
+.post-body ul {
+  margin: 0 0 1.05rem 1.15rem;
+  padding: 0;
+  color: var(--muted);
+  display: grid;
+  gap: 0.4rem;
+}
+
+.post-body ul li::marker {
+  color: var(--cyan);
+}
+
+.post-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.6rem;
+}
+
+.post-nav .card span {
+  display: block;
+}
+
+.post-nav .nav-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+
+@media (max-width: 640px) {
+  .post-nav { grid-template-columns: 1fr; }
 }

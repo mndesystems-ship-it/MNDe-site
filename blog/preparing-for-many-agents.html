@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="The number of non-human principals only grows. Controls that feel optional at one agent become load-bearing at ten thousand — authorization as infrastructure, not a feature."
+    />
+    <meta name="theme-color" content="#111416" />
+    <meta property="og:title" content="Preparing for a world of many agents | MNDe" />
+    <meta property="og:description" content="At one agent, per-action authority looks like overhead. At scale it is the only thing holding." />
+    <meta property="og:type" content="article" />
+    <title>Preparing for a world of many agents | MNDe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/site.css" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+    <link rel="canonical" href="https://mndesystems.com/blog/preparing-for-many-agents.html" />
+    <script defer src="../assets/js/site.js"></script>
+  </head>
+  <body data-page="blog">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="site-header" data-include="header"></header>
+      <main id="main" class="page-main">
+        <article>
+          <section class="page-hero">
+            <div class="container container-narrow reveal">
+              <p class="eyebrow">Outlook <span class="post-dot">·</span> <time datetime="2026-08-19">August 19, 2026</time></p>
+              <h1>Preparing for a world of many agents</h1>
+              <p class="lead">
+                The count of non-human principals in a typical system has only ever gone up, and the
+                current direction of software makes that trend faster, not slower. A control that feels
+                like optional overhead when one agent is acting becomes load-bearing when ten thousand
+                are — which is a reason to treat authorization as infrastructure now, before it has to
+                be.
+              </p>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="container container-narrow post-body">
+              <h2>Overhead at one, structural at scale</h2>
+              <p>
+                At the scale of a single well-behaved agent, per-action authorization is easy to
+                dismiss. The agent is trusted, the credential is broad, and nothing has gone wrong yet.
+                The controls look like friction around a problem you do not have. This is exactly the
+                point at which foundations are cheapest to lay and least obviously necessary.
+              </p>
+              <p>
+                Scale changes the character of the problem, not just its size. Ten thousand agents means
+                ten thousand standing credentials, each broader than any single action requires; a
+                blast radius that is the union of everything all of them can reach; and an incident
+                surface where "which action, authorized by whom, on whose behalf" has to be answerable
+                after the fact, at volume, without a human in each loop. Approaches that lean on trust
+                and vigilance degrade precisely as the number of principals grows.
+              </p>
+
+              <h2>The controls that hold are per-action</h2>
+              <p>
+                What survives that transition are controls attached to the act rather than to the actor.
+                If each consequential action must present valid, specific, unconsumed authority for
+                exactly that action, then the number of agents stops being a multiplier on risk. A
+                thousand agents holding no standing authority, each able only to perform the specific
+                things they were granted, is a very different exposure from a thousand agents each
+                holding broad credentials and good intentions.
+              </p>
+
+              <p class="invariant">
+                <span>No consequential machine action executes unless it presents valid, specific,
+                unconsumed authority for that exact action.</span>
+              </p>
+
+              <h2>Infrastructure, not a feature</h2>
+              <p>
+                The reason to call this infrastructure rather than a feature is that it has to hold
+                uniformly to hold at all. A control that applies to some actions, on some paths, when the
+                SDK is used correctly, is not a boundary — it is a suggestion with good coverage. The
+                property worth having is that there is no path to a consequential action that skips the
+                check, and that property is a function of provider permissions, identity, and network
+                boundaries, not of any single library's cooperation.
+              </p>
+
+              <h2>Measured about the future</h2>
+              <p>
+                We try to be careful here, because "the future needs this" is the easiest place to
+                overclaim. We are not predicting agent counts, and we are not asserting that MNDe today
+                secures a fleet of thousands. What we are building toward is the boundary that a world of
+                many agents will require, demonstrated first on a narrow, honest reference integration,
+                with the harder guarantees — non-bypassability across providers, distributed single-use,
+                independent witnessing — named explicitly as target architecture rather than shipped
+                claims. The bet is not that agents will multiply; that is already happening. The bet is
+                that authorization should be per-action and load-bearing before the count makes it
+                unavoidable.
+              </p>
+
+              <div class="post-nav">
+                <a class="card" href="capability-not-identity.html">
+                  <span class="nav-label">Back to the start</span>
+                  <strong>Capability, not identity, is the unit of machine trust</strong>
+                </a>
+                <a class="card" href="evidence-you-can-verify.html">
+                  <span class="nav-label">Previously</span>
+                  <strong>Evidence you can verify without trusting us</strong>
+                </a>
+              </div>
+
+              <div class="cluster mt-2">
+                <a class="button button-primary" href="../contact.html" data-track-group="cta" data-track-label="Request a technical pilot">Request a technical pilot</a>
+              </div>
+            </div>
+          </section>
+        </article>
+      </main>
+      <footer class="site-footer" data-include="footer"></footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A grant presented twice is a grant you have lost control of. One nonce, one action, consumed exactly once — why single-use is the sane default for machine authority."
+    />
+    <meta name="theme-color" content="#111416" />
+    <meta property="og:title" content="Single-use by default: authority that cannot be replayed | MNDe" />
+    <meta property="og:description" content="Reusable authority is replayable authority. Bind a grant to one nonce and one action, consumed exactly once." />
+    <meta property="og:type" content="article" />
+    <title>Single-use by default: authority that cannot be replayed | MNDe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/site.css" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+    <link rel="canonical" href="https://mndesystems.com/blog/single-use-by-default.html" />
+    <script defer src="../assets/js/site.js"></script>
+  </head>
+  <body data-page="blog">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="site-header" data-include="header"></header>
+      <main id="main" class="page-main">
+        <article>
+          <section class="page-hero">
+            <div class="container container-narrow reveal">
+              <p class="eyebrow">Mechanism <span class="post-dot">·</span> <time datetime="2026-07-21">July 21, 2026</time></p>
+              <h1>Single-use by default: authority that cannot be replayed</h1>
+              <p class="lead">
+                A grant you can present twice is a grant you have already lost control of. If the same
+                token authorizes the same action every time it is shown, then a copy of it — leaked,
+                logged, or intercepted — is as good as the original. Single-use is not a hardening
+                option to add later; it is the sane default for authority over consequential acts.
+              </p>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="container container-narrow post-body">
+              <h2>Reusable means replayable</h2>
+              <p>
+                The word "replay" makes it sound exotic. It is not. Reusable authority is replayable
+                authority, by definition: the value works more than once, so anyone who obtains the
+                value can make it work again. A bearer token that grants an action on every
+                presentation is a small, portable instruction that says "do this," and it will say it
+                to whoever repeats it. The convenience of reuse and the risk of replay are the same
+                property viewed from two sides.
+              </p>
+
+              <h2>One nonce, one action, consumed once</h2>
+              <p>
+                Single-use authority carries a nonce — a value that is valid exactly once. The grant is
+                bound to that nonce and to one specific action. Before the protected executor performs
+                the action, it reserves and consumes the nonce; after that, the nonce is spent. A second
+                presentation of the same grant finds a consumed nonce and is refused. The authority did
+                its one job and then ceased to be authority.
+              </p>
+              <p>
+                Pair single-use with a short expiration and the exposure window collapses further. A
+                grant that is valid once, for a specific act, for a brief moment, is a poor thing to
+                steal. There is little to replay and almost no time in which to try.
+              </p>
+
+              <p class="invariant">
+                <span>A grant is consumed exactly once; a second presentation is refused as replay.</span>
+              </p>
+
+              <h2>The hard part is "exactly once"</h2>
+              <p>
+                Saying a grant is single-use is easy. Guaranteeing it under concurrency is the real
+                engineering. If two executors present the same grant at the same instant, exactly one
+                must win the reservation and the other must lose — cleanly, with no window in which both
+                believe they succeeded. That is a linearizability property, and it belongs to the
+                consumption ledger, not to hopeful application code.
+              </p>
+              <p>
+                We are deliberate about how strong a claim we make here. A single-process reference can
+                demonstrate one-winner selection, and ours does. Demonstrating it as a distributed,
+                linearizable guarantee — the version that survives real infrastructure, partitions, and
+                retries — is target architecture, and proving it requires a deployed ledger under an
+                adversarial test, not a diagram. We would rather name that gap than paper over it.
+              </p>
+
+              <h2>Why this is the default, not a mode</h2>
+              <p>
+                If authority is reusable by default and single-use is an opt-in, the safe path is the
+                one people forget to take. Making single-use the default inverts that: reuse becomes the
+                thing you must consciously and narrowly justify, and the ordinary grant is one that
+                cannot be replayed because it no longer exists after it is used. That default is what
+                lets "present valid, specific, unconsumed authority" mean something at the moment of
+                execution.
+              </p>
+
+              <div class="post-nav">
+                <a class="card" href="evidence-you-can-verify.html">
+                  <span class="nav-label">Next in the thread</span>
+                  <strong>Evidence you can verify without trusting us</strong>
+                </a>
+                <a class="card" href="the-execution-gap.html">
+                  <span class="nav-label">Previously</span>
+                  <strong>The execution gap: “it had permission” is the wrong question</strong>
+                </a>
+              </div>
+
+              <div class="cluster mt-2">
+                <a class="button button-primary" href="../contact.html" data-track-group="cta" data-track-label="Request a technical pilot">Request a technical pilot</a>
+              </div>
+            </div>
+          </section>
+        </article>
+      </main>
+      <footer class="site-footer" data-include="footer"></footer>
+    </div>
+  </body>
+</html>

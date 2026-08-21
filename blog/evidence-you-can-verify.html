@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Two linked receipts — authorized and executed — verifiable offline against published keys. What verifiable evidence proves, and the honest line between tamper-evidence and tamper-resistance."
+    />
+    <meta name="theme-color" content="#111416" />
+    <meta property="og:title" content="Evidence you can verify without trusting us | MNDe" />
+    <meta property="og:description" content="Receipts are only useful if you can check them yourself. What offline-verifiable evidence establishes — and what it does not." />
+    <meta property="og:type" content="article" />
+    <title>Evidence you can verify without trusting us | MNDe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/site.css" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+    <link rel="canonical" href="https://mndesystems.com/blog/evidence-you-can-verify.html" />
+    <script defer src="../assets/js/site.js"></script>
+  </head>
+  <body data-page="blog">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="site-header" data-include="header"></header>
+      <main id="main" class="page-main">
+        <article>
+          <section class="page-hero">
+            <div class="container container-narrow reveal">
+              <p class="eyebrow">Evidence <span class="post-dot">·</span> <time datetime="2026-08-06">August 6, 2026</time></p>
+              <h1>Evidence you can verify without trusting us</h1>
+              <p class="lead">
+                A record is only evidence if you can check it yourself. A log we ask you to believe is a
+                claim, not proof. The point of authorization evidence is to let a third party confirm
+                what happened using published keys and their own tools — without taking our word for any
+                of it.
+              </p>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="container container-narrow post-body">
+              <h2>Two receipts, deliberately separate</h2>
+              <p>
+                MNDe records an action as two linked objects, not one. An <strong>authorization
+                receipt</strong> says: MNDe authorized this execution, under this policy, using this
+                grant. An <strong>execution receipt</strong> says: this executor used that grant for
+                that execution and observed this result. They are signed independently — the authority
+                and the executor are different roles with different keys — and they are bound together
+                by shared identifiers and hashes.
+              </p>
+              <p>
+                Keeping them separate is the point. One object that asserts both "this was allowed" and
+                "this was done" collapses two claims that should be independently checkable. Two linked
+                objects let a verifier confirm that what was executed is exactly what was authorized, and
+                notice immediately if the two ever fail to line up.
+              </p>
+
+              <h2>Offline verification is the test</h2>
+              <p>
+                The receipts are meant to be verified offline: parse them, canonicalize each object,
+                validate the signatures against published trust roots, resolve the delegation chain, and
+                confirm that execution, grant, authorization, and result all reference each other as they
+                should. None of that requires calling an MNDe service. If it did, "verification" would
+                just be trust with extra steps.
+              </p>
+
+              <p class="invariant">
+                <span>Verify the evidence against published keys — not against our word for it.</span>
+              </p>
+
+              <h2>Tamper-evident is not tamper-proof</h2>
+              <p>
+                Here is the distinction we work hardest not to blur. Signed, linked receipts are
+                <em>tamper-evident</em>: alter a field and the signature no longer verifies, break a link
+                and the chain no longer resolves, so changes are detectable. That is genuinely useful.
+                It is not the same as <em>tamper-resistant</em>. Evidence that can be verified can still
+                be withheld, or deleted, or never emitted at all by a party who controls the only copy.
+                Detecting a changed record is a different guarantee from being unable to hide one.
+              </p>
+              <p>
+                Closing that second gap is what witnesses and transparency logs are for: independent
+                parties and inclusion proofs so that a record cannot be quietly suppressed or a split
+                view presented to different observers. We treat that layer as target architecture. The
+                signing and linkage are implemented and demonstrable; append-only inclusion backed by
+                independent witnesses is not yet proven in production, and we would rather you hold us to
+                that line than assume the stronger property.
+              </p>
+
+              <h2>What to ask of any evidence claim</h2>
+              <p>
+                A good test for anyone's "audit trail" is simple: can I verify it without the vendor? If
+                verification requires the party being audited to remain online, honest, and cooperative,
+                it is not evidence in the sense that matters. Our aim is receipts that a skeptic can
+                check with published keys and open tooling — and honesty about the parts of that goal
+                that are still ahead of us.
+              </p>
+
+              <div class="post-nav">
+                <a class="card" href="preparing-for-many-agents.html">
+                  <span class="nav-label">Next in the thread</span>
+                  <strong>Preparing for a world of many agents</strong>
+                </a>
+                <a class="card" href="single-use-by-default.html">
+                  <span class="nav-label">Previously</span>
+                  <strong>Single-use by default: authority that cannot be replayed</strong>
+                </a>
+              </div>
+
+              <div class="cluster mt-2">
+                <a class="button button-primary" href="../contact.html" data-track-group="cta" data-track-label="Request a technical pilot">Request a technical pilot</a>
+              </div>
+            </div>
+          </section>
+        </article>
+      </main>
+      <footer class="site-footer" data-include="footer"></footer>
+    </div>
+  </body>
+</html>

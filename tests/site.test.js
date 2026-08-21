@@ -13,8 +13,27 @@ const indexHtml = read("index.html");
 const contactHtml = read("contact.html");
 
 test("primary navigation exposes the expected sections", () => {
-  ["Product", "Architecture", "Evidence", "Integrations", "Security", "Roadmap", "Contact"].forEach((label) => {
+  ["Product", "Architecture", "Evidence", "Integrations", "Security", "Roadmap", "Blog", "Contact"].forEach((label) => {
     assert.ok(siteJs.includes(`label: "${label}"`), `nav should include ${label}`);
+  });
+});
+
+test("the blog listing links every post, and each post is complete", () => {
+  const posts = [
+    "capability-not-identity.html",
+    "the-execution-gap.html",
+    "single-use-by-default.html",
+    "evidence-you-can-verify.html",
+    "preparing-for-many-agents.html"
+  ];
+  const listing = read("blog/index.html");
+  posts.forEach((slug) => {
+    assert.ok(listing.includes(`href="${slug}"`), `listing links ${slug}`);
+    const post = read(path.join("blog", slug));
+    assert.match(post, /class="invariant"/, `${slug} has an invariant callout`);
+    assert.ok(post.includes('href="../contact.html"'), `${slug} has a contact CTA`);
+    assert.match(post, /class="post-nav"/, `${slug} links sibling posts`);
+    assert.ok(post.includes('data-page="blog"'), `${slug} marks itself as a blog page`);
   });
 });
 
@@ -58,7 +77,16 @@ test("evidence labeling never claims production verification in the browser lab"
 test("the app pages contain no inline scripts, styles, or handlers", () => {
   // Scoped to the pages this project authors. The legacy privacy/terms pages
   // are pre-existing and intentionally use inline styles.
-  const htmlFiles = ["index.html", "contact.html"];
+  const htmlFiles = [
+    "index.html",
+    "contact.html",
+    "blog/index.html",
+    "blog/capability-not-identity.html",
+    "blog/the-execution-gap.html",
+    "blog/single-use-by-default.html",
+    "blog/evidence-you-can-verify.html",
+    "blog/preparing-for-many-agents.html"
+  ];
 
   htmlFiles.forEach((file) => {
     const html = read(file);

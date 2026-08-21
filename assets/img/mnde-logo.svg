@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 210" fill="none" role="img" aria-label="MNDe — Every execution. Verified.">
+  <title>MNDe — Every execution. Verified.</title>
+  <g stroke="#ffffff" stroke-opacity="0.12" stroke-width="3" fill="none">
+    <path d="M14 62 H70 L86 78" />
+    <path d="M14 100 H96" />
+    <path d="M14 138 H70 L86 122" />
+    <path d="M40 62 V138" />
+  </g>
+  <g fill="#ffffff" fill-opacity="0.12">
+    <rect x="9" y="57" width="10" height="10" rx="1.5" />
+    <rect x="9" y="95" width="10" height="10" rx="1.5" />
+    <rect x="9" y="133" width="10" height="10" rx="1.5" />
+    <rect x="91" y="95" width="10" height="10" rx="1.5" />
+    <rect x="82" y="74" width="9" height="9" rx="1.5" />
+    <rect x="82" y="118" width="9" height="9" rx="1.5" />
+  </g>
+  <polygon points="157,68.8 193,68.8 211,100 193,131.2 157,131.2 139,100" fill="#1a56f0" />
+  <path d="M233 100 H300" stroke="#1a56f0" stroke-width="10" />
+  <path d="M291 83 L319 100 L291 117" stroke="#1a56f0" stroke-width="10" stroke-linejoin="miter" />
+  <text x="360" y="132" font-family="'Inter','Helvetica Neue',Arial,sans-serif" font-size="104" font-weight="800" letter-spacing="-4" fill="#ffffff" fill-opacity="0.92">MNDe</text>
+  <text x="352" y="182" text-anchor="middle" font-family="'Inter','Helvetica Neue',Arial,sans-serif" font-size="21" font-weight="700" letter-spacing="7"><tspan fill="#1a56f0">EVERY </tspan><tspan fill="#ffffff" fill-opacity="0.34">EXECUTION. </tspan><tspan fill="#1a56f0">VERIFIED.</tspan></text>
+</svg>
