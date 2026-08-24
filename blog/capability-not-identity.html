@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Identity says who is asking; it never says whether this exact action was authorized. Why capability, not identity, is the unit of machine trust."
+    />
+    <meta name="theme-color" content="#111416" />
+    <meta property="og:title" content="Capability, not identity, is the unit of machine trust | MNDe" />
+    <meta property="og:description" content="Identity answers who is asking. It was never designed to answer whether this exact action is allowed right now." />
+    <meta property="og:type" content="article" />
+    <title>Capability, not identity, is the unit of machine trust | MNDe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/site.css" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+    <link rel="canonical" href="https://mndesystems.com/blog/capability-not-identity.html" />
+    <script defer src="../assets/js/site.js"></script>
+  </head>
+  <body data-page="blog">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="site-header" data-include="header"></header>
+      <main id="main" class="page-main">
+        <article>
+          <section class="page-hero">
+            <div class="container container-narrow reveal">
+              <p class="eyebrow">Foundations <span class="post-dot">·</span> <time datetime="2026-06-18">June 18, 2026</time></p>
+              <h1>Capability, not identity, is the unit of machine trust</h1>
+              <p class="lead">
+                Identity answers a question — <em>who is asking</em> — that was never the question a
+                consequential action needed answered. As the principals in our systems stop being
+                people and start being programs, the gap between "who" and "what, exactly, is allowed"
+                becomes the whole problem.
+              </p>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="container container-narrow post-body">
+              <h2>Identity and authority were quietly conflated</h2>
+              <p>
+                For most of the history of access control, authenticating a caller and authorizing an
+                action were close enough to treat as one step. A person logged in, and the system
+                trusted that the human on the other end would exercise judgment about what to do next.
+                Roles and scopes stood in for that judgment: give the operator the "deploy" role and
+                trust them to deploy the right thing, at the right time, for the right reason.
+              </p>
+              <p>
+                That worked because a person was in the loop, absorbing the ambiguity. Identity was a
+                proxy for a whole context of intent that lived in someone's head. Remove the person and
+                the proxy stops standing for anything. A program holding the "deploy" role has no
+                judgment to fall back on; it has exactly the authority the token encodes, applied at
+                machine speed, across every path that token can reach.
+              </p>
+
+              <h2>A key is not a decision</h2>
+              <p>
+                Authentication proves possession of a credential. It says the caller is who the
+                credential belongs to. It says nothing about whether <strong>this</strong> request —
+                this repository, this commit, this amount, this resource, right now — was ever
+                intended. A valid token on an unintended action is still a valid token. The system
+                sees a known principal and waves it through, because "known principal" is all it was
+                ever built to check.
+              </p>
+              <p>
+                The failure mode this produces is familiar: an agent is provisioned with broad,
+                standing credentials so it can handle whatever comes up, and then it does something no
+                one decided to allow — not because the credential was stolen, but because the
+                credential was always broader than any single action required.
+              </p>
+
+              <h2>Capabilities name the act, not the actor</h2>
+              <p>
+                A capability inverts the default. Instead of "this actor may do things in this
+                category," it says "this exact action, against this exact resource, with these exact
+                parameters, is authorized — once, briefly." The unit of trust is the act, bound to the
+                authority that permits it, rather than a durable badge the actor carries around.
+              </p>
+              <p>
+                Identity does not disappear; it becomes an input to issuing a capability rather than
+                the thing checked at execution. The question shifts from "do we recognize you?" to "do
+                you hold valid, specific, unconsumed authority for the thing you are about to do?"
+              </p>
+
+              <p class="invariant">
+                <span>No consequential machine action executes unless it presents valid, specific,
+                unconsumed authority for that exact action.</span>
+              </p>
+
+              <h2>What this changes in practice</h2>
+              <p>
+                Concretely, it means a compromised or confused agent cannot convert broad standing
+                access into an unintended act, because it never holds broad standing access to convert.
+                It holds — at most — a grant for the specific thing it was authorized to do, and that
+                grant does not generalize. This is the boundary MNDe is built around. Today it is
+                demonstrated on a single reference integration; treating it as a universal control
+                across every provider an organization uses is target architecture, and we try to say
+                so plainly wherever the claim appears.
+              </p>
+              <p>
+                Capability over identity is not a rejection of identity. It is a recognition that, for
+                non-human principals, identity was answering the easy question and leaving the hard one
+                to a human who is no longer there.
+              </p>
+
+              <div class="post-nav">
+                <a class="card" href="the-execution-gap.html">
+                  <span class="nav-label">Next in the thread</span>
+                  <strong>The execution gap: “it had permission” is the wrong question</strong>
+                </a>
+                <a class="card" href="preparing-for-many-agents.html">
+                  <span class="nav-label">Related</span>
+                  <strong>Preparing for a world of many agents</strong>
+                </a>
+              </div>
+
+              <div class="cluster mt-2">
+                <a class="button button-primary" href="../contact.html" data-track-group="cta" data-track-label="Request a technical pilot">Request a technical pilot</a>
+              </div>
+            </div>
+          </section>
+        </article>
+      </main>
+      <footer class="site-footer" data-include="footer"></footer>
+    </div>
+  </body>
+</html>

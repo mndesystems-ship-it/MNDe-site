@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A standing permission is a broad, ambient claim. Execution is a single specific act. Close the execution gap by authorizing the act, at the act."
+    />
+    <meta name="theme-color" content="#111416" />
+    <meta property="og:title" content="The execution gap: it had permission is the wrong question | MNDe" />
+    <meta property="og:description" content="Permission is ambient and durable; execution is specific and momentary. The mismatch is where unintended actions live." />
+    <meta property="og:type" content="article" />
+    <title>The execution gap: “it had permission” is the wrong question | MNDe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/site.css" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+    <link rel="canonical" href="https://mndesystems.com/blog/the-execution-gap.html" />
+    <script defer src="../assets/js/site.js"></script>
+  </head>
+  <body data-page="blog">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="site-header" data-include="header"></header>
+      <main id="main" class="page-main">
+        <article>
+          <section class="page-hero">
+            <div class="container container-narrow reveal">
+              <p class="eyebrow">Model <span class="post-dot">·</span> <time datetime="2026-07-02">July 2, 2026</time></p>
+              <h1>The execution gap: “it had permission” is the wrong question</h1>
+              <p class="lead">
+                When something goes wrong, the reassurance is almost always the same: the agent
+                <em>had permission</em>. That sentence is true and beside the point. Permission is a
+                broad, ambient, durable claim. Execution is a single specific act. The distance between
+                the two is where unintended actions live.
+              </p>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="container container-narrow post-body">
+              <h2>Two different kinds of statement</h2>
+              <p>
+                "Has permission to merge pull requests" and "is authorized to merge <em>this</em> pull
+                request, at <em>this</em> commit, into <em>this</em> branch, right now" are not the same
+                statement at different resolutions. They are different kinds of statement. The first is
+                a standing property of the actor. The second is a fact about one act. Most systems only
+                ever check the first, then let the actor choose the second for itself.
+              </p>
+              <p>
+                For a human that delegation of choice is reasonable; judgment lives with the person. For
+                an automated agent, "choose the specific act for yourself" is precisely the latitude you
+                did not mean to grant. The permission was meant to describe a boundary. The agent treats
+                it as a blank check inside that boundary.
+              </p>
+
+              <h2>The gap is structural, not a bug</h2>
+              <p>
+                This is not a matter of a missing check that a diligent team would have added. It is
+                built into the shape of permission-based access. A permission has to be broad enough to
+                cover the class of actions you want to allow, which means it is necessarily broader than
+                any one action inside that class. The gap between "the class is allowed" and "this
+                instance was intended" cannot be closed by making the permission more careful. It can
+                only be closed by checking the instance.
+              </p>
+
+              <h2>Authorize the act, at the act</h2>
+              <p>
+                Closing the execution gap means moving the decision to the moment and the granularity of
+                the act itself. Instead of asking, once and in advance, "may this agent merge pull
+                requests," the system asks, at the point of execution, "is there valid authority for
+                exactly this merge?" The authority is scoped to the specific parameters — repository,
+                pull request, expected commit, method — and it is checked against the action actually
+                being attempted. If the action drifts from what was authorized, even by one field, it is
+                a different action, and the authority does not cover it.
+              </p>
+
+              <p class="invariant">
+                <span>No consequential machine action executes unless it presents valid, specific,
+                unconsumed authority for that exact action.</span>
+              </p>
+
+              <h2>What this does and does not buy you</h2>
+              <p>
+                Done well, this makes "it had permission" unsayable, because there is no ambient
+                permission to point to — only a grant for the exact act, which either matched or did
+                not. What it does not do by itself is prevent an authorized decision from being a bad
+                one; authorizing the exact act is a control over <em>scope</em>, not over judgment.
+                Deciding <em>whether</em> to issue a grant is a separate, policy-level question, and one
+                we treat as its own boundary rather than folding into execution.
+              </p>
+              <p>
+                We describe the enforcement point — a protected executor that will not act without a
+                valid grant — as a reference implementation today, with provider-enforced
+                non-bypassability as target architecture. The distinction matters, and we keep it
+                visible: the model is only as good as the point that actually refuses.
+              </p>
+
+              <div class="post-nav">
+                <a class="card" href="single-use-by-default.html">
+                  <span class="nav-label">Next in the thread</span>
+                  <strong>Single-use by default: authority that cannot be replayed</strong>
+                </a>
+                <a class="card" href="capability-not-identity.html">
+                  <span class="nav-label">Previously</span>
+                  <strong>Capability, not identity, is the unit of machine trust</strong>
+                </a>
+              </div>
+
+              <div class="cluster mt-2">
+                <a class="button button-primary" href="../contact.html" data-track-group="cta" data-track-label="Request a technical pilot">Request a technical pilot</a>
+              </div>
+            </div>
+          </section>
+        </article>
+      </main>
+      <footer class="site-footer" data-include="footer"></footer>
+    </div>
+  </body>
+</html>
